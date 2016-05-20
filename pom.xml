@@ -18,6 +18,8 @@
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>findbugs-maven-plugin</artifactId>
             <version>3.0.3</version>
+            <!--We do need this just at compile time.-->
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -72,6 +74,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
