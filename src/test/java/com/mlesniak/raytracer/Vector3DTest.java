@@ -14,8 +14,8 @@ public class Vector3DTest {
 
     @Test
     public void length() {
-        final int x = 3;
-        final int y = 3;
+        final int x = 1;
+        final int y = 2;
         final int z = 3;
         Vector3D vec = new Vector3D(x, y, z);
         double len = vec.length();
