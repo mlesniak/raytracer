@@ -58,3 +58,7 @@ crashlytics-build.properties
 fabric.properties
 
 # Created by .ignore support plugin (hsz.mobi)
+
+
+# User-added files
+git.properties
