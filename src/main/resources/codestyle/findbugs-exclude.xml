@@ -1,0 +1,23 @@
+<!--Exclusions for FindBugs.-->
+<!--Do NOT exclude rules just because you are lazy!-->
+<!--See http://findbugs.sourceforge.net/manual/filter.html#d0e2318-->
+<FindBugsFilter>
+    <!--SnVI: Class is Serializable, but doesn't define serialVersionUID (SE_NO_SERIALVERSIONID)-->
+    <Match>
+        <Bug code="SnVI"/>
+    </Match>
+
+    <!--Serializable inner class-->
+    <!--We have a lot of inner serializable classes in Spark, hence we can't do anything here except having-->
+    <!--multiple static private classes which is very ugly.-->
+    <Match>
+        <Bug code="Se"/>
+    </Match>
+
+    <!--Should be a static inner class-->
+    <!--We use a lot of static inner classes for code structuring, hence this is ok.-->
+    <Match>
+        <Bug code="SIC"/>
+    </Match>
+
+</FindBugsFilter>
