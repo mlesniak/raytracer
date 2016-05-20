@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mlesniak/raytracer.svg?branch=master)](https://travis-ci.org/mlesniak/raytracer)
+
 # Introduction
 
 A simple raytracer. All algorithms, ideas and designs are motivated by the book
