@@ -40,6 +40,13 @@
             <artifactId>logstash-logback-encoder</artifactId>
             <version>4.7</version>
         </dependency>
+
+        <!--YAML parser-->
+        <dependency>
+            <groupId>com.esotericsoftware.yamlbeans</groupId>
+            <artifactId>yamlbeans</artifactId>
+            <version>1.09</version>
+        </dependency>
     </dependencies>
 
     <build>
