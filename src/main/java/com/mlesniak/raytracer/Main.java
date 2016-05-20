@@ -33,5 +33,6 @@ public class Main {
         final String pathname = "image.png";
         ImageIO.write(image, "png", new java.io.File(pathname));
         LOG.info("Wrote image to file {}", pathname);
+        LOG.info("Application finished");
     }
 }
