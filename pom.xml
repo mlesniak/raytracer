@@ -143,6 +143,7 @@
                         <id>validate</id>
                         <phase>validate</phase>
                         <configuration>
+                            <includeTestSourceDirectory>true</includeTestSourceDirectory>
                             <configLocation>src/main/resources/codestyle/checkstyle.xml</configLocation>
                             <encoding>UTF-8</encoding>
                             <consoleOutput>true</consoleOutput>

@@ -10,10 +10,17 @@ import static org.junit.Assert.assertEquals;
  * @author Michael Lesniak (mlesniak@micromata.de)
  */
 public class Vector3DTest {
+    private static final double DELTA = 0.000001;
+
     @Test
     public void length() {
-        Vector3D vec = new Vector3D(1, 2, 3);
+        final int x = 3;
+        final int y = 3;
+        final int z = 3;
+        Vector3D vec = new Vector3D(x, y, z);
         double len = vec.length();
-        assertEquals(3.7416573867739413, len, 0.000001);
+
+        final double expected = 3.7416573867739413;
+        assertEquals(expected, len, DELTA);
     }
 }
