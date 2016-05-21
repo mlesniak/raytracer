@@ -8,8 +8,8 @@ A simple raytracer. All algorithms, ideas and designs are motivated by the book
 > Andrew S. Glassner et al.
 > 1989, The Morgan Kaufmann Series in Computer Graphics
 
-Note that the current state of this project is **hacky**, i.e. the code is not yet
-refactored, structured or documented.
+Note that the current state of this project is <span style="background-color: rgb(210,229,255); border: 1px solid gray; 
+padding: 5px;">hacky</span>, i.e. the code is not yet refactored, structured or documented.
 
 # Gallery
 
