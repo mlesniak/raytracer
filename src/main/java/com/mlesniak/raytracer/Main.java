@@ -27,6 +27,7 @@ public class Main {
         Scene scene = readScene();
 
         // Draw single pixels.
+        long start = System.currentTimeMillis();
         BufferedImage image = new BufferedImage(scene.getWidth(), scene.getHeight(), BufferedImage.TYPE_INT_RGB);
         for (int y = 0; y < scene.getHeight(); y++) {
             for (int x = 0; x < scene.getWidth(); x++) {
@@ -34,6 +35,11 @@ public class Main {
                 image.setRGB(x, scene.getHeight() - y - 1, rgb);
             }
         }
+        long end = System.currentTimeMillis();
+        long duration = end - start;
+        long pixels = scene.getWidth() * scene.getHeight();
+        long pixelPerMs = pixels / duration;
+        LOG.info("pixel={}, duration={}, pixel per ms = {}", pixels, duration, pixelPerMs);
 
         // Write file.
         final String pathname = scene.getFilename();
