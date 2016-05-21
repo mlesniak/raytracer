@@ -3,8 +3,8 @@
 #
 
 filename: image.png
-width: 100
-height: 100
+width: 10
+height: 10
 
 camera:
   x: 5.0
@@ -22,13 +22,13 @@ view:
       z: 0.0
 
 objects:
-#  - !com.mlesniak.raytracer.Scene$Sphere
-#    color: 0xFFFF00
-#    center:
-#      x: 5.0
-#      y: 5.0
-#      z: 1.0
-#    radius: 1.0
+  - !com.mlesniak.raytracer.Scene$Sphere
+    color: 0xFFFF00
+    center:
+      x: 5.0
+      y: 5.0
+      z: 1.0
+    radius: 1.0
 #  - !com.mlesniak.raytracer.Scene$Sphere
 #    color: 0xFF0000
 #    center:
@@ -36,13 +36,13 @@ objects:
 #      y: 3.0
 #      z: 1.0
 #    radius: 1.0
-  - !com.mlesniak.raytracer.Scene$Sphere
-      color: 0x00FF00
-      center:
-        x: 9.0
-        y: 9.0
-        z: 1.0
-      radius: 1.0
+#  - !com.mlesniak.raytracer.Scene$Sphere
+#      color: 0x00FF00
+#      center:
+#        x: 9.0
+#        y: 9.0
+#        z: 1.0
+#      radius: 1.0
 
       # This is buggy, image is rotated and sphere are eliptical.
 
