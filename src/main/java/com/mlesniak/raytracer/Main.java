@@ -2,6 +2,7 @@ package com.mlesniak.raytracer;
 
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
+import com.esotericsoftware.yamlbeans.YamlWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,8 +10,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.Map;
 
 /**
  * Application entry point.
@@ -20,7 +21,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         LOG.info("Application starting");
-        Map<String, String> config = readScene();
+        Scene scene = readScene();
+        LOG.debug("Scene={}", scene);
 
         // Draw single pixels.
         final int width = 320;
@@ -37,19 +39,28 @@ public class Main {
         }
 
         // Write file.
-        final String pathname = config.get("imagePath");
+        final String pathname = scene.getFilename();
         ImageIO.write(image, "png", new java.io.File(pathname));
         LOG.info("Wrote image to file {}", pathname);
         LOG.info("Application finished");
+
+        yamlPlayground(scene);
     }
 
-    @SuppressWarnings("unchecked")
-    private static Map<String, String> readScene() throws YamlException, UnsupportedEncodingException {
+    private static void yamlPlayground(Scene scene) throws YamlException {
+        // Playground for examining new yaml struture elements in a scene.
+        scene.setCamera(new Vector3D(1, 2, 3));
+        StringWriter sw = new StringWriter();
+        YamlWriter writer = new YamlWriter(sw);
+        writer.write(scene);
+        writer.close();
+        LOG.debug("Scene={}", sw.toString());
+    }
+
+    private static Scene readScene() throws YamlException, UnsupportedEncodingException {
         InputStream stream = Main.class.getResourceAsStream("/scene/default.yaml");
         InputStreamReader streamReader = new InputStreamReader(stream, "UTF-8");
         YamlReader reader = new YamlReader(streamReader);
-        Map<String, String> config = (Map<String, String>) reader.read();
-        LOG.debug("Read configuration {}", config);
-        return config;
+        return reader.read(Scene.class);
     }
 }
