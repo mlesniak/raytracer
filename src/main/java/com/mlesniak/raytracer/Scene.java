@@ -8,6 +8,9 @@ package com.mlesniak.raytracer;
  * @author Michael Lesniak (mlesniak@micromata.de)
  */
 public class Scene {
+    private int width;
+    private int height;
+
     private String filename;
     private Vector3D camera;
 
@@ -67,6 +70,22 @@ public class Scene {
 
     public void setView(View view) {
         this.view = view;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     @Override

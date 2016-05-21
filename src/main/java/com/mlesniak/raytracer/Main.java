@@ -24,14 +24,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         LOG.info("Application starting");
         Scene scene = readScene();
-        LOG.debug("Scene={}", scene);
 
         // Draw single pixels.
-        final int width = 320;
-        final int height = 200;
-        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        BufferedImage image = new BufferedImage(scene.getWidth(), scene.getHeight(), BufferedImage.TYPE_INT_RGB);
+        for (int y = 0; y < scene.getHeight(); y++) {
+            for (int x = 0; x < scene.getWidth(); x++) {
                 int r = x % 0xFF;
                 int g = y % 0xFF;
                 int b = 30 % 0xFF;
