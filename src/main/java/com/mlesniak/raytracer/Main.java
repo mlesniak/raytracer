@@ -63,7 +63,7 @@ public class Main {
         // Check ray against all objects in the scene.
         int color = 0x000000;
         for (Scene.SceneObject object : scene.getObjects()) {
-            if (object.intersect(ray)) {
+            if (object.intersect(scene.getCamera(), ray).isPresent()) {
                 color = 0xFF0000;
             }
         }
