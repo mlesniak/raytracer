@@ -19,6 +19,14 @@ public class Vector3D {
         this.z = z;
     }
 
+    public Vector3D copy() {
+        return new Vector3D(x, y, z);
+    }
+
+    public double dot(Vector3D vec) {
+        return x * vec.x + y * vec.y + z * vec.z;
+    }
+
     public double length() {
         return Math.sqrt(x * x + y * y + z * z);
     }

@@ -13,9 +13,14 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
+import java.util.Optional;
 
 /**
  * Application entry point.
+ * <p>
+ * // TODO ML Shading
+ * // TODO ML Refactoring!
+ * // TODO ML Lights / Shadows
  *
  * @author Michael Lesniak (mlesniak@micromata.de)
  */
@@ -69,17 +74,27 @@ public class Main {
         // Check ray against all objects in the scene.
         int color = 0;
         for (Scene.SceneObject object : scene.getObjects()) {
-            if (object.intersect(scene.getCamera(), ray).isPresent()) {
-                color = object.getColor();
+            Optional<Vector3D> oi = object.intersect(scene.getCamera(), ray);
+            if (oi.isPresent()) {
+                Vector3D i = oi.get();
+                // We only have sphere for now.
+                Scene.Sphere s = (Scene.Sphere) object;
+                // Determine normal vector.
+                Vector3D norm = new Vector3D((i.x - s.center.x) / s.radius, (i.y - s.center.y) / s.radius, (i.y -
+                        s.center.y) / s.radius).normalize();
+                // Determine angle to camera for poor man's shading.
+                Vector3D cam = camera.copy().normalize();
+                double angle = Math.acos(cam.dot(norm));
+                color = toRGB((int) ((double) 0xFF * angle * 10), 0, 0);
             }
         }
 
         return color;
     }
 
-//    private static int toRGB(int r, int g, int b) {
-//        return r << 16 | g << 8 | b;
-//    }
+    private static int toRGB(int r, int g, int b) {
+        return r << 16 | g << 8 | b;
+    }
 
     private static void yamlPlayground(Scene scene) throws YamlException {
         if (true) {
