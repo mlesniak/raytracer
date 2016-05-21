@@ -31,7 +31,7 @@ public class Main {
         for (int y = 0; y < scene.getHeight(); y++) {
             for (int x = 0; x < scene.getWidth(); x++) {
                 int rgb = computePixel(scene, x, y);
-                image.setRGB(x, y, rgb);
+                image.setRGB(x, scene.getHeight() - y - 1, rgb);
             }
         }
 
