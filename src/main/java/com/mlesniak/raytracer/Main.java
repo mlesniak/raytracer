@@ -15,6 +15,8 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * Application entry point.
+ *
+ * @author Michael Lesniak (mlesniak@micromata.de)
  */
 public class Main {
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
@@ -49,7 +51,10 @@ public class Main {
 
     private static void yamlPlayground(Scene scene) throws YamlException {
         // Playground for examining new yaml struture elements in a scene.
-        scene.setCamera(new Vector3D(1, 2, 3));
+        Scene.View view = new Scene.View();
+        view.setLowerLeft(new Vector3D(-1, 0, 0));
+        view.setUpperRight(new Vector3D(1, 1, 0));
+        scene.setView(view);
         StringWriter sw = new StringWriter();
         YamlWriter writer = new YamlWriter(sw);
         writer.write(scene);
