@@ -55,9 +55,15 @@ public class Main {
                 + y * stepY, scene.getView().getLowerLeft().z);
         // LOG.info("pView={}", pView);
 
-        int r = x % 0xFF;
-        int g = y % 0xFF;
-        int b = 30 % 0xFF;
+        // Determine normalized ray from camera.
+        Vector3D camera = scene.getCamera();
+        Vector3D ray = new Vector3D(camera.x - pView.x, camera.y - pView.y, camera.z - pView.z).normalize();
+
+        // No intersection algorithms yet.
+        return toRGB((int) ray.x, (int) ray.y, (int) ray.z);
+    }
+
+    private static int toRGB(int r, int g, int b) {
         return r << 16 | g << 8 | b;
     }
 
