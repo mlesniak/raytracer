@@ -28,5 +28,21 @@ objects:
       x: 5.0
       y: 5.0
       z: 1.0
-    radius: 1.9
+    radius: 1.0
+  - !com.mlesniak.raytracer.Scene$Sphere
+    color: 0xFF0000
+    center:
+      x: 3.0
+      y: 3.0
+      z: 1.0
+    radius: 1.0
+  - !com.mlesniak.raytracer.Scene$Sphere
+      color: 0x00FF00
+      center:
+        x: 9.0
+        y: 9.0
+        z: 1.0
+      radius: 1.0
+
+      # This is buggy, image is rotated and sphere are eliptical.
 
