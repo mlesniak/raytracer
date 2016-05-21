@@ -56,7 +56,17 @@ public class Scene {
     /**
      * Generalized scene object.
      */
-    public interface SceneObject {
+    public abstract static class SceneObject {
+        private int color;
+
+        public int getColor() {
+            return color;
+        }
+
+        public void setColor(int color) {
+            this.color = color;
+        }
+
         /**
          * Check for intersection.
          *
@@ -64,13 +74,13 @@ public class Scene {
          * @param ray    ray to check against intersection.
          * @return true if intersects
          */
-        Optional<Vector3D> intersect(Vector3D origin, Vector3D ray);
+        abstract Optional<Vector3D> intersect(Vector3D origin, Vector3D ray);
     }
 
     /**
      * Sphere description.
      */
-    public static class Sphere implements SceneObject {
+    public static class Sphere extends SceneObject {
         public Vector3D center;
         public double radius;
 

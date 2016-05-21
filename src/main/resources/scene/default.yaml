@@ -9,7 +9,7 @@ height: 100
 camera:
   x: 5.0
   y: 5.0
-  z: -1.0
+  z: -1
 
 view:
    lowerLeft:
@@ -23,9 +23,10 @@ view:
 
 objects:
   - !com.mlesniak.raytracer.Scene$Sphere
+    color: 0xFFFF00
     center:
       x: 5.0
       y: 5.0
       z: 1.0
-    radius: 1.0
+    radius: 1.9
 
