@@ -72,9 +72,9 @@ public class Main {
         return color;
     }
 
-    private static int toRGB(int r, int g, int b) {
-        return r << 16 | g << 8 | b;
-    }
+//    private static int toRGB(int r, int g, int b) {
+//        return r << 16 | g << 8 | b;
+//    }
 
     private static void yamlPlayground(Scene scene) throws YamlException {
         if (true) {

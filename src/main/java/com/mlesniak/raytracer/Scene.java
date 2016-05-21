@@ -84,16 +84,17 @@ public class Scene {
         public Vector3D center;
         public double radius;
 
+        public Sphere() {
+            center = new Vector3D(0, 0, 0);
+        }
+
         @Override
         public Optional<Vector3D> intersect(Vector3D origin, Vector3D ray) {
             // Use code for book, optimize later.
             double a = 1;
             double b =
-                    2 * (ray.x * (origin.x - center.x) +
-                            ray.y * (origin.y - center.y) +
-                            ray.z * (origin.z - center.z));
-            double c = (origin.x - center.x) * (origin.x - center.x) +
-                    (origin.y - center.y) * (origin.y - center.y) +
+                    2 * (ray.x * (origin.x - center.x) + ray.y * (origin.y - center.y) + ray.z * (origin.z - center.z));
+            double c = (origin.x - center.x) * (origin.x - center.x) + (origin.y - center.y) * (origin.y - center.y) +
                     (origin.z - center.z) * (origin.z - center.z) - (radius * radius);
 
             double disc = b * b - 4 * c;
