@@ -12,6 +12,7 @@ A simple raytracer. All algorithms, ideas and designs are motivated by the book
 
 ![Commit 460f043](gallery/image-460f043.png?raw=true)
 ![Commit bc76514](gallery/image-bc76514.png?raw=true)
+![Commit 70c56f1](gallery/image-70c56f1.png?raw=true)
 
 # License
 
