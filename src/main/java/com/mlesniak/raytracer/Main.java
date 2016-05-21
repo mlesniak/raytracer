@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.LinkedList;
 
 /**
  * Application entry point.
@@ -74,10 +75,12 @@ public class Main {
         }
 
         // Playground for examining new yaml struture elements in a scene.
-        Scene.View view = new Scene.View();
-        view.setLowerLeft(new Vector3D(-1, 0, 0));
-        view.setUpperRight(new Vector3D(1, 1, 0));
-        scene.setView(view);
+        Scene.Sphere sphere = new Scene.Sphere();
+        sphere.setCenter(new Vector3D(5, 5, 1));
+        sphere.setRadius(1.0);
+        scene.setObjects(new LinkedList<>());
+        scene.getObjects().add(sphere);
+
         StringWriter sw = new StringWriter();
         YamlWriter writer = new YamlWriter(sw);
         writer.write(scene);

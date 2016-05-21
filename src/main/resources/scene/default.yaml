@@ -20,3 +20,12 @@ view:
       x: 10.0
       y: 10.0
       z: 0.0
+
+objects:
+  - !com.mlesniak.raytracer.Scene$Sphere
+    center:
+      x: 5.0
+      y: 5.0
+      z: 1.0
+    radius: 1.0
+

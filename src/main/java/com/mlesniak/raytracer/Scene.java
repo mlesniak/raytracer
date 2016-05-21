@@ -1,5 +1,7 @@
 package com.mlesniak.raytracer;
 
+import java.util.List;
+
 /**
  * Describe a full scene.
  * <p>
@@ -15,6 +17,8 @@ public class Scene {
     private Vector3D camera;
 
     private View view;
+
+    private List<SceneObject> objects;
 
     /**
      * Viewport description.
@@ -45,6 +49,48 @@ public class Scene {
                     "lowerLeft=" + lowerLeft +
                     ", upperRight=" + upperRight +
                     '}';
+        }
+    }
+
+    /**
+     * Generalized scene object.
+     */
+    public interface SceneObject {
+        /**
+         * Check for intersection.
+         *
+         * @param ray ray to check against intersection.
+         * @return true if intersects
+         */
+        boolean intersect(Vector3D ray);
+    }
+
+    /**
+     * Sphere description.
+     */
+    public static class Sphere implements SceneObject {
+        public Vector3D center;
+        public double radius;
+
+        @Override
+        public boolean intersect(Vector3D ray) {
+            return Math.random() > 0.5;
+        }
+
+        public Vector3D getCenter() {
+            return center;
+        }
+
+        public void setCenter(Vector3D center) {
+            this.center = center;
+        }
+
+        public double getRadius() {
+            return radius;
+        }
+
+        public void setRadius(double radius) {
+            this.radius = radius;
         }
     }
 
@@ -88,12 +134,11 @@ public class Scene {
         this.height = height;
     }
 
-    @Override
-    public String toString() {
-        return "Scene{" +
-                "filename='" + filename + '\'' +
-                ", camera=" + camera +
-                ", view=" + view +
-                '}';
+    public List<SceneObject> getObjects() {
+        return objects;
+    }
+
+    public void setObjects(List<SceneObject> objects) {
+        this.objects = objects;
     }
 }
