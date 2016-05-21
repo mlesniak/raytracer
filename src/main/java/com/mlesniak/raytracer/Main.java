@@ -61,14 +61,13 @@ public class Main {
         Vector3D ray = new Vector3D(camera.x - pView.x, camera.y - pView.y, camera.z - pView.z).normalize();
 
         // Check ray against all objects in the scene.
-        int color = ((int) (Math.random() * 0xFF));
+        int color = 0;
         for (Scene.SceneObject object : scene.getObjects()) {
             if (object.intersect(scene.getCamera(), ray).isPresent()) {
                 color = object.getColor();
             }
         }
 
-        // No intersection algorithms yet.
         return color;
     }
 
