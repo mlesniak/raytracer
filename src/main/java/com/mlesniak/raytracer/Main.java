@@ -29,10 +29,7 @@ public class Main {
         BufferedImage image = new BufferedImage(scene.getWidth(), scene.getHeight(), BufferedImage.TYPE_INT_RGB);
         for (int y = 0; y < scene.getHeight(); y++) {
             for (int x = 0; x < scene.getWidth(); x++) {
-                int r = x % 0xFF;
-                int g = y % 0xFF;
-                int b = 30 % 0xFF;
-                int rgb = r << 16 | g << 8 | b;
+                int rgb = computePixel(scene, x, y);
                 image.setRGB(x, y, rgb);
             }
         }
@@ -46,7 +43,30 @@ public class Main {
         yamlPlayground(scene);
     }
 
+    private static int computePixel(Scene scene, int x, int y) {
+        // Later we should factor this out into a "precalculated values" - object.
+        double stepX = (scene.getView().getUpperRight().getX() - scene.getView().getLowerLeft().getX()) /
+                scene.getWidth();
+        double stepY = (scene.getView().getUpperRight().getY() - scene.getView().getLowerLeft().getY()) /
+                scene.getHeight();
+
+        // Determine point on view plane.
+        Vector3D pView = new Vector3D(scene.getView().getLowerLeft().x + x * stepX, scene.getView().getLowerLeft().y
+                + y * stepY, scene.getView().getLowerLeft().z);
+        // LOG.info("pView={}", pView);
+
+        int r = x % 0xFF;
+        int g = y % 0xFF;
+        int b = 30 % 0xFF;
+        return r << 16 | g << 8 | b;
+    }
+
     private static void yamlPlayground(Scene scene) throws YamlException {
+        if (true) {
+            // Exit point if we do not play around with scenes. Prevents findbug error about unused method.
+            return;
+        }
+
         // Playground for examining new yaml struture elements in a scene.
         Scene.View view = new Scene.View();
         view.setLowerLeft(new Vector3D(-1, 0, 0));
