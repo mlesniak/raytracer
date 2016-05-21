@@ -60,8 +60,16 @@ public class Main {
         Vector3D camera = scene.getCamera();
         Vector3D ray = new Vector3D(camera.x - pView.x, camera.y - pView.y, camera.z - pView.z).normalize();
 
+        // Check ray against all objects in the scene.
+        int color = 0x000000;
+        for (Scene.SceneObject object : scene.getObjects()) {
+            if (object.intersect(ray)) {
+                color = 0xFF0000;
+            }
+        }
+
         // No intersection algorithms yet.
-        return toRGB((int) ray.x, (int) ray.y, (int) ray.z);
+        return color;
     }
 
     private static int toRGB(int r, int g, int b) {
