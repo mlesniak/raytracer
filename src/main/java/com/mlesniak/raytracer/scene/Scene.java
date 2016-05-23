@@ -1,4 +1,6 @@
-package com.mlesniak.raytracer;
+package com.mlesniak.raytracer.scene;
+
+import com.mlesniak.raytracer.Vector3D;
 
 import java.util.List;
 import java.util.Optional;
@@ -74,7 +76,7 @@ public class Scene {
          * @param ray    ray to check against intersection.
          * @return true if intersects
          */
-        abstract Optional<Vector3D> intersect(Vector3D origin, Vector3D ray);
+        public abstract Optional<Vector3D> intersect(Vector3D origin, Vector3D ray);
     }
 
     /**

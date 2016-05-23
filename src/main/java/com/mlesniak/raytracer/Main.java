@@ -3,6 +3,7 @@ package com.mlesniak.raytracer;
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
+import com.mlesniak.raytracer.scene.Scene;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
