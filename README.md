@@ -21,6 +21,15 @@ These images show progress and bugs while developing.
 ![Commit 70c56f1](gallery/image-70c56f1.png?raw=true)
 ![Commit 3b7f1a3](gallery/image-3b7f1a3.png?raw=true)
 
+# Quality
+
+As part of the build process we check the code quality using
+
+- Checkstyle (in particular for source code formatting)
+- FindBugs
+
+If any of these tools emit a warning, the build fails.
+
 # License
 
 Copyright (c) 2016 Michael Lesniak, licensed under the Apache License.
