@@ -28,7 +28,8 @@ As part of the build process we check the code quality using
 - Checkstyle (in particular for source code formatting)
 - FindBugs
 
-If any of these tools emit a warning, the build fails.
+The corresponding configuration files are stored in ```src/main/resrouces/codestyle```. If any of these tools emit a 
+warning, the build fails.
 
 # License
 
