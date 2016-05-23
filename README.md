@@ -34,3 +34,19 @@ warning, the build fails.
 # License
 
 Copyright (c) 2016 Michael Lesniak, licensed under the Apache License.
+
+# Todo and planned features
+
+[ ] Is the perspective correction correct even if the camera moves (see image 3)?
+[ ] Gouraud Shading
+[ ] Phong Shading
+[ ] Shadows / Lightning
+[ ] Reflections
+[ ] Materials such as glass
+[ ] Plane as geometric object
+[ ] Texture mapping
+[ ] Antialiasing
+[ ] Procedural generation
+[ ] Animation support
+[ ] Support for external file formats (SketchUp? Blender?)
+
