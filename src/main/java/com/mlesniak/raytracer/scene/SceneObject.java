@@ -1,6 +1,6 @@
 package com.mlesniak.raytracer.scene;
 
-import com.mlesniak.raytracer.Vector3D;
+import com.mlesniak.raytracer.math.Vector3D;
 
 import java.util.Optional;
 

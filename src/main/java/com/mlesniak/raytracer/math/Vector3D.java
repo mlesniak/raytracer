@@ -1,4 +1,4 @@
-package com.mlesniak.raytracer;
+package com.mlesniak.raytracer.math;
 
 /**
  * Vector3D library.

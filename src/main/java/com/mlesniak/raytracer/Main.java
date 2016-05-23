@@ -3,6 +3,7 @@ package com.mlesniak.raytracer;
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
+import com.mlesniak.raytracer.math.Vector3D;
 import com.mlesniak.raytracer.scene.Scene;
 import com.mlesniak.raytracer.scene.SceneObject;
 import com.mlesniak.raytracer.scene.Sphere;

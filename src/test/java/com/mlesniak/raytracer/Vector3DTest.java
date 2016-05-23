@@ -1,5 +1,6 @@
 package com.mlesniak.raytracer;
 
+import com.mlesniak.raytracer.math.Vector3D;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
