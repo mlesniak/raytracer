@@ -2,7 +2,6 @@ package com.mlesniak.raytracer;
 
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
-import com.esotericsoftware.yamlbeans.YamlWriter;
 import com.mlesniak.raytracer.math.Vector3D;
 import com.mlesniak.raytracer.scene.Scene;
 import com.mlesniak.raytracer.scene.SceneObject;
@@ -14,9 +13,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.LinkedList;
 import java.util.Optional;
 
 /**
@@ -55,8 +52,6 @@ public class Main {
         ImageIO.write(image, "png", new java.io.File(pathname));
         LOG.info("Wrote image to file {}", pathname);
         LOG.info("Application finished");
-
-        yamlPlayground(scene);
     }
 
     private static int computePixel(Scene scene, int x, int y) {
@@ -98,26 +93,6 @@ public class Main {
 
     private static int toRGB(int r, int g, int b) {
         return r << 16 | g << 8 | b;
-    }
-
-    private static void yamlPlayground(Scene scene) throws YamlException {
-        if (true) {
-            // Exit point if we do not play around with scenes. Prevents findbug error about unused method.
-            return;
-        }
-
-        // Playground for examining new yaml struture elements in a scene.
-        Sphere sphere = new Sphere();
-        sphere.setCenter(new Vector3D(5, 5, 1));
-        sphere.setRadius(1.0);
-        scene.setObjects(new LinkedList<>());
-        scene.getObjects().add(sphere);
-
-        StringWriter sw = new StringWriter();
-        YamlWriter writer = new YamlWriter(sw);
-        writer.write(scene);
-        writer.close();
-        LOG.debug("Scene={}", sw.toString());
     }
 
     private static Scene readScene() throws YamlException, UnsupportedEncodingException {
