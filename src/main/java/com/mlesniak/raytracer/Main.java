@@ -4,6 +4,7 @@ import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 import com.mlesniak.raytracer.scene.Scene;
+import com.mlesniak.raytracer.scene.SceneObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,7 +75,7 @@ public class Main {
 
         // Check ray against all objects in the scene.
         int color = 0;
-        for (Scene.SceneObject object : scene.getObjects()) {
+        for (SceneObject object : scene.getObjects()) {
             Optional<Vector3D> oi = object.intersect(scene.getCamera(), ray);
             if (oi.isPresent()) {
                 Vector3D i = oi.get();
