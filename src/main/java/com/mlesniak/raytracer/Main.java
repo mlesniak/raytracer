@@ -31,7 +31,11 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         LOG.info("Application starting");
-        Scene scene = readScene("src/main/resources/scene/default.yaml");
+        if (args.length < 1) {
+            LOG.error("No filename given. Aborting.");
+            return;
+        }
+        Scene scene = readScene(args[0]);
 
         // Draw single pixels.
         long start = System.currentTimeMillis();
