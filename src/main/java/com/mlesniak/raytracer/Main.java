@@ -1,19 +1,20 @@
 package com.mlesniak.raytracer;
 
-import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.mlesniak.raytracer.math.Vector3D;
 import com.mlesniak.raytracer.scene.Scene;
 import com.mlesniak.raytracer.scene.SceneObject;
 import com.mlesniak.raytracer.scene.Sphere;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.InputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 /**
@@ -30,7 +31,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         LOG.info("Application starting");
-        Scene scene = readScene();
+        Scene scene = readScene("src/main/resources/scene/default.yaml");
 
         // Draw single pixels.
         long start = System.currentTimeMillis();
@@ -95,8 +96,8 @@ public class Main {
         return r << 16 | g << 8 | b;
     }
 
-    private static Scene readScene() throws YamlException, UnsupportedEncodingException {
-        InputStream stream = Main.class.getResourceAsStream("/scene/default.yaml");
+    private static Scene readScene(String filename) throws IOException {
+        FileInputStream stream = FileUtils.openInputStream(new File(filename));
         InputStreamReader streamReader = new InputStreamReader(stream, "UTF-8");
         YamlReader reader = new YamlReader(streamReader);
         return reader.read(Scene.class);

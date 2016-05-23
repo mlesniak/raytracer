@@ -22,21 +22,21 @@ view:
       z: 0.0
 
 objects:
-  - !com.mlesniak.raytracer.scene.Scene$Sphere
+  - !com.mlesniak.raytracer.scene.Sphere
     color: 0xFFFF00
     center:
       x: 5.0
       y: 5.0
       z: 1.0
     radius: 1.5
-  - !com.mlesniak.raytracer.scene.Scene$Sphere
+  - !com.mlesniak.raytracer.scene.Sphere
     color: 0xFF0000
     center:
       x: 3.0
       y: 3.0
       z: 1.0
     radius: 0.75
-  - !com.mlesniak.raytracer.scene.Scene$Sphere
+  - !com.mlesniak.raytracer.scene.Sphere
       color: 0x00FF00
       center:
         x: 9.0
