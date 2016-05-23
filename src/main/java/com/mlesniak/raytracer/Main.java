@@ -5,6 +5,7 @@ import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 import com.mlesniak.raytracer.scene.Scene;
 import com.mlesniak.raytracer.scene.SceneObject;
+import com.mlesniak.raytracer.scene.Sphere;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,7 +81,7 @@ public class Main {
             if (oi.isPresent()) {
                 Vector3D i = oi.get();
                 // We only have sphere for now.
-                Scene.Sphere s = (Scene.Sphere) object;
+                Sphere s = (Sphere) object;
                 // Determine normal vector.
                 Vector3D norm = new Vector3D((i.x - s.center.x) / s.radius, (i.y - s.center.y) / s.radius, (i.y -
                         s.center.y) / s.radius).normalize();
@@ -105,7 +106,7 @@ public class Main {
         }
 
         // Playground for examining new yaml struture elements in a scene.
-        Scene.Sphere sphere = new Scene.Sphere();
+        Sphere sphere = new Sphere();
         sphere.setCenter(new Vector3D(5, 5, 1));
         sphere.setRadius(1.0);
         scene.setObjects(new LinkedList<>());
