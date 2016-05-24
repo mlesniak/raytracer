@@ -1,7 +1,13 @@
 package com.mlesniak.raytracer.scene;
 
+import com.esotericsoftware.yamlbeans.YamlReader;
 import com.mlesniak.raytracer.math.Vector3D;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 /**
@@ -100,5 +106,12 @@ public class Scene {
 
     public void setObjects(List<SceneObject> objects) {
         this.objects = objects;
+    }
+
+    public static Scene readScene(String filename) throws IOException {
+        FileInputStream stream = FileUtils.openInputStream(new File(filename));
+        InputStreamReader streamReader = new InputStreamReader(stream, "UTF-8");
+        YamlReader reader = new YamlReader(streamReader);
+        return reader.read(Scene.class);
     }
 }
