@@ -37,7 +37,7 @@ Copyright (c) 2016 Michael Lesniak, licensed under the Apache License.
 
 # Todo and planned features
 
-[ ] Is the perspective correction correct even if the camera moves (see image 3)?
+[ ] Implement standard FoV / Camera pattern
 [ ] Gouraud Shading
 [ ] Phong Shading
 [ ] Shadows / Lightning
