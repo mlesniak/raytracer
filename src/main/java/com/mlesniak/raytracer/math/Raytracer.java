@@ -24,7 +24,6 @@ public class Raytracer {
     public Raytracer(Scene scene) {
         this.scene = scene;
         int cores = Runtime.getRuntime().availableProcessors();
-        cores = 1;
         LOG.info("Initialized executor service with {} cores", cores);
         executorService = Executors.newFixedThreadPool(cores);
     }
@@ -36,7 +35,7 @@ public class Raytracer {
         // Parallelize over lines.
         for (int y = 0; y < scene.getHeight(); y++) {
             final int line = y;
-            executorService.submit((Runnable) () -> {
+            executorService.execute((Runnable) () -> {
                 for (int x = 0; x < scene.getWidth(); x++) {
 //                    LOG.info("Processing x={}, y={}", x, line);
                     int rgb = computePixel(scene, x, line);
@@ -101,16 +100,16 @@ public class Raytracer {
         for (SceneObject object : scene.getObjects()) {
             Optional<Vector3D> oi = object.intersect(scene.getCamera(), ray);
             if (oi.isPresent()) {
-                Vector3D i = oi.get();
+//                Vector3D i = oi.get();
                 // We only have sphere for now.
                 Sphere s = (Sphere) object;
                 // Determine normal vector.
                 // TODO ML Must be done on a per-object basis?
-                Vector3D norm = new Vector3D((i.x - s.center.x) / s.radius, (i.y - s.center.y) / s.radius, (i.y -
-                        s.center.y) / s.radius).normalize();
+//                Vector3D norm = new Vector3D((i.x - s.center.x) / s.radius, (i.y - s.center.y) / s.radius, (i.y -
+//                        s.center.y) / s.radius).normalize();
                 // Determine angle to camera for poor man's shading.
-                Vector3D cam = camera.copy().normalize();
-                double angle = Math.acos(cam.dot(norm));
+//                Vector3D cam = camera.copy().normalize();
+//                double angle = Math.acos(cam.dot(norm));
 //                color = toRGB((int) ((double) 0xFF * angle * 10), 0, 0);
                 color = s.getColor();
             }
@@ -119,7 +118,7 @@ public class Raytracer {
         return color;
     }
 
-    private int toRGB(int r, int g, int b) {
-        return r << 16 | g << 8 | b;
-    }
+//    private int toRGB(int r, int g, int b) {
+//        return r << 16 | g << 8 | b;
+//    }
 }

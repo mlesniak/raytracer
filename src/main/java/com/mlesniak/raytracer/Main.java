@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Application entry point.
@@ -20,18 +21,21 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         LOG.info("Application starting");
-        Scene scene = readScene(args);
-        BufferedImage image = new Raytracer(scene).raytrace();
-        writeImage(scene, image);
+        Optional<Scene> scene = readScene(args);
+        if (scene.isPresent()) {
+            Scene s = scene.get();
+            BufferedImage image = new Raytracer(s).raytrace();
+            writeImage(s, image);
+        }
         LOG.info("Application finished");
     }
 
-    private static Scene readScene(String[] args) throws IOException {
+    private static Optional<Scene> readScene(String[] args) throws IOException {
         if (args.length < 1) {
             LOG.error("No filename given. Aborting.");
-            System.exit(1);
+            return Optional.empty();
         }
-        return Scene.readScene(args[0]);
+        return Optional.of(Scene.readScene(args[0]));
     }
 
     private static void writeImage(Scene scene, BufferedImage image) throws IOException {
