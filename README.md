@@ -49,4 +49,5 @@ Copyright (c) 2016 Michael Lesniak, licensed under the Apache License.
 [ ] Procedural generation
 [ ] Animation support
 [ ] Support for external file formats (SketchUp? Blender?)
-[ ] Parallelization
+[ ] negative z-axis goes into the scene
+[X] Parallelization

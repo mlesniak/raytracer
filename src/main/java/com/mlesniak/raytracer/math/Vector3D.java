@@ -23,6 +23,10 @@ public class Vector3D {
         return new Vector3D(x, y, z);
     }
 
+    public Vector3D scale(double factor) {
+        return new Vector3D(x * factor, y * factor, y * factor);
+    }
+
     public double dot(Vector3D vec) {
         return x * vec.x + y * vec.y + z * vec.z;
     }
