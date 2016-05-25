@@ -23,7 +23,6 @@ public class Raytracer {
     public Raytracer(Scene scene) {
         this.scene = scene;
         int cores = Runtime.getRuntime().availableProcessors();
-        cores = 1;
         LOG.info("Initialized executor service with {} cores", cores);
         executorService = Executors.newFixedThreadPool(cores);
     }
