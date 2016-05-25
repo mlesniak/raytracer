@@ -38,7 +38,7 @@ Copyright (c) 2016 Michael Lesniak, licensed under the Apache License.
 
 # Todo and planned features
 
-- Implement standard FoV / Camera pattern
+- ~~Implement standard FoV / Camera pattern~~
 - Gouraud Shading
 - Phong Shading
 - Shadows / Lightning
@@ -50,5 +50,5 @@ Copyright (c) 2016 Michael Lesniak, licensed under the Apache License.
 - Procedural generation
 - Animation support
 - Support for external file formats (SketchUp? Blender?)
-- negative z-axis goes into the scene
+- ~~negative z-axis goes into the scene~~
 - ~~Parallelization~~
