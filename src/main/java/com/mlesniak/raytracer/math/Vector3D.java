@@ -1,5 +1,7 @@
 package com.mlesniak.raytracer.math;
 
+import java.text.DecimalFormat;
+
 /**
  * Vector3D library.
  *
@@ -28,7 +30,7 @@ public class Vector3D {
     }
 
     public Vector3D scale(double factor) {
-        return new Vector3D(x * factor, y * factor, y * factor);
+        return new Vector3D(x * factor, y * factor, z * factor);
     }
 
     public double dot(Vector3D vec) {
@@ -70,10 +72,12 @@ public class Vector3D {
 
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("#.###");
+
         return "Vector3D{" +
-                "x=" + x +
-                ", y=" + y +
-                ", z=" + z +
+                "x=" + df.format(x) +
+                ", y=" + df.format(y) +
+                ", z=" + df.format(z) +
                 '}';
     }
 

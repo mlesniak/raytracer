@@ -23,6 +23,7 @@ public class Raytracer {
     public Raytracer(Scene scene) {
         this.scene = scene;
         int cores = Runtime.getRuntime().availableProcessors();
+        cores = 1;
         LOG.info("Initialized executor service with {} cores", cores);
         executorService = Executors.newFixedThreadPool(cores);
     }
@@ -63,12 +64,14 @@ public class Raytracer {
     }
 
     private int computePixel(Scene scene, int x, int y) {
+//        LOG.info("x={}, y={}", x, y);
+
         Vector3D camera = scene.getCamera();
 
         // Current reference http://www.macwright.org/literate-raytracer/
 
         // We need this in radians.
-        double fovRad = Math.PI * (scene.getFov() / 2) * 180; // TODO ML Understand formula
+        double fovRad = Math.PI * (scene.getFov() / 2) / 180; // TODO ML Understand formula
         double ratio = (double) scene.getHeight() / scene.getWidth();
         double halfWidth = Math.tan(fovRad);
         double halfHeight = halfWidth * ratio;
@@ -78,15 +81,21 @@ public class Raytracer {
         double pixelHeight = cameraHeight / (scene.getHeight() - 1);
 
         Vector3D eyeVector = camera.path(scene.getLookAt()).normalize();
+//        LOG.info("  eyeVector={}", eyeVector);
 
         Vector3D vup = new Vector3D(0, 1, 0); //.normalize();
-        Vector3D right = eyeVector.crossProduct(vup).normalize();
-        Vector3D up = right.crossProduct(eyeVector).normalize();
+        Vector3D right = eyeVector.crossProduct(vup);
+//        LOG.info("  right={}", right);
+        Vector3D up = right.crossProduct(eyeVector);
+//        LOG.info("  up={}", up);
 
-        Vector3D xcomp = right.scale(x * pixelWidth - halfWidth);
-        Vector3D ycomp = up.scale(y * pixelHeight - halfHeight);
+        Vector3D xcomp = right.scale(((double) x) * pixelWidth - halfWidth);
+//        LOG.info("  xcomp={}", xcomp);
+        Vector3D ycomp = up.scale(((double) y) * pixelHeight - halfHeight);
+//        LOG.info("  ycomp={}", ycomp);
 
         Vector3D ray = eyeVector.add(xcomp).add(ycomp).normalize();
+//        LOG.info("  ray={}", ray);
 
         // Check ray against all objects in the scene.
         int color = 0;
