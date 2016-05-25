@@ -72,7 +72,7 @@ public class Raytracer {
         // We need this in radians.
         double fovRad = Math.PI * (scene.getFov() / 2) / 180; // TODO ML Understand formula
         double ratio = (double) scene.getHeight() / scene.getWidth();
-        double halfWidth = Math.tan(fovRad);
+        double halfWidth = Math.tan(fovRad / 2);
         double halfHeight = halfWidth * ratio;
         double cameraWidth = halfWidth * 2;
         double cameraHeight = halfHeight * 2;
