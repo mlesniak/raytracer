@@ -43,3 +43,10 @@ objects:
         y: 5
         z: -2
       radius: 1
+  - !com.mlesniak.raytracer.scene.Sphere
+      color: 0x0000FF
+      center:
+        x: 4.25
+        y: 5
+        z: -1
+      radius: 0.5
