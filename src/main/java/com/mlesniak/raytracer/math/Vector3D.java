@@ -23,6 +23,10 @@ public class Vector3D {
         return new Vector3D(x, y, z);
     }
 
+    public Vector3D path(Vector3D vec) {
+        return new Vector3D(vec.x - x, vec.y - y, vec.z - z);
+    }
+
     public Vector3D scale(double factor) {
         return new Vector3D(x * factor, y * factor, y * factor);
     }
@@ -71,5 +75,19 @@ public class Vector3D {
                 ", y=" + y +
                 ", z=" + z +
                 '}';
+    }
+
+    public Vector3D crossProduct(Vector3D vec) {
+        return new Vector3D(
+                y * vec.z - z * vec.y,
+                z * vec.x - x * vec.z,
+                x * vec.y - y * vec.x);
+    }
+
+    public Vector3D add(Vector3D vec) {
+        return new Vector3D(
+                x + vec.x,
+                y + vec.y,
+                z + vec.z);
     }
 }
