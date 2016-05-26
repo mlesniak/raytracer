@@ -94,10 +94,17 @@ public class Raytracer {
 
         // Check ray against all objects in the scene.
         int color = 0;
+        double minimalDistance = Double.MAX_VALUE;
         for (SceneObject object : scene.getObjects()) {
             Optional<Vector3D> oi = object.intersect(scene.getCamera(), ray);
             if (oi.isPresent()) {
-                color = object.getColor();
+                // Check length to camera.
+                Vector3D intersection = oi.get();
+                double objectDist = scene.getCamera().distance(intersection);
+                if (objectDist < minimalDistance) {
+                    minimalDistance = objectDist;
+                    color = object.getColor();
+                }
             }
         }
 

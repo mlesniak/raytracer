@@ -37,6 +37,13 @@ public class Vector3D {
         return x * vec.x + y * vec.y + z * vec.z;
     }
 
+    public double distance(Vector3D vec) {
+        double x1 = x - vec.x;
+        double y1 = y - vec.y;
+        double z1 = z - vec.z;
+        return Math.sqrt(x1 * x1 + y1 * y1 + z1 * z1);
+    }
+
     public double length() {
         return Math.sqrt(x * x + y * y + z * z);
     }

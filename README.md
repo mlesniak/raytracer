@@ -50,7 +50,7 @@ warning, the build fails.
 - Procedural generation
 - Animation support
 - Support for external file formats (SketchUp? Blender?)
-- Choose nearest pixel in view (not depending on order of scene objects)
+- ~~Choose nearest pixel in view (not depending on order of scene objects)~~
 - ~~negative z-axis goes into the scene~~
 - ~~Parallelization~~
 
