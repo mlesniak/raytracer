@@ -90,7 +90,7 @@ public class Raytracer {
         Vector3D yShift = sceneValues.up.scale(y * sceneValues.pixelHeight - sceneValues.halfHeight);
 
         // Compute ray from eye to position on viewplane.
-        Vector3D ray = sceneValues.eyeRay.add(xShift).add(yShift).normalize();
+        Vector3D ray = sceneValues.eyeRay.plus(xShift).plus(yShift).normalize();
 
         // Check ray against all objects in the scene.
         int color = 0;

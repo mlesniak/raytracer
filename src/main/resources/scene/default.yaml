@@ -22,6 +22,17 @@ fov: 90
 
 
 objects:
+  - !com.mlesniak.raytracer.scene.Plane
+      color: 0xFF00FF
+      point:
+        x: 0
+        y: 0
+        z: 0
+      normal:
+        x: 0
+        y: 1
+        z: 0
+
   - !com.mlesniak.raytracer.scene.Sphere
     color: 0xFFFF00
     center:
@@ -50,3 +61,4 @@ objects:
         y: 4.5
         z: -1
       radius: 0.5
+

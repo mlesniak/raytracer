@@ -18,13 +18,13 @@ public class Sphere extends SceneObject {
     }
 
     @Override
-    public Optional<Vector3D> intersect(Vector3D origin, Vector3D ray) {
+    public Optional<Vector3D> intersect(Vector3D camera, Vector3D ray) {
         // Use code for book, optimize later.
         // double a = 1;
         double b =
-                2 * (ray.x * (origin.x - center.x) + ray.y * (origin.y - center.y) + ray.z * (origin.z - center.z));
-        double c = (origin.x - center.x) * (origin.x - center.x) + (origin.y - center.y) * (origin.y - center.y) +
-                (origin.z - center.z) * (origin.z - center.z) - (radius * radius);
+                2 * (ray.x * (camera.x - center.x) + ray.y * (camera.y - center.y) + ray.z * (camera.z - center.z));
+        double c = (camera.x - center.x) * (camera.x - center.x) + (camera.y - center.y) * (camera.y - center.y) +
+                (camera.z - center.z) * (camera.z - center.z) - (radius * radius);
 
         double disc = b * b - 4 * c;
         if (disc < 0) {
@@ -36,7 +36,7 @@ public class Sphere extends SceneObject {
 
         double t = Math.min(t0, t1);
         // Intersection point is...
-        Vector3D intersection = new Vector3D(origin.x + ray.x * t, origin.z + ray.z * t, origin.z + ray.z * t);
+        Vector3D intersection = new Vector3D(camera.x + ray.x * t, camera.z + ray.z * t, camera.z + ray.z * t);
 
         return Optional.of(intersection);
     }

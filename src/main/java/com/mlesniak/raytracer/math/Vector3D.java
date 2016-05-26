@@ -88,10 +88,18 @@ public class Vector3D {
                 x * vec.y - y * vec.x);
     }
 
-    public Vector3D add(Vector3D vec) {
+    public Vector3D plus(Vector3D vec) {
         return new Vector3D(
                 x + vec.x,
                 y + vec.y,
                 z + vec.z);
     }
+
+    public Vector3D minus(Vector3D vec) {
+        return new Vector3D(
+                x - vec.x,
+                y - vec.y,
+                z - vec.z);
+    }
 }
+

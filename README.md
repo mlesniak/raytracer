@@ -44,11 +44,12 @@ Copyright (c) 2016 Michael Lesniak, licensed under the Apache License.
 - Shadows / Lightning
 - Reflections
 - Materials such as glass
-- Plane as geometric object
+~~- Plane as geometric object~~
 - Texture mapping
 - Antialiasing
 - Procedural generation
 - Animation support
 - Support for external file formats (SketchUp? Blender?)
+- Choose nearest pixel in view (not depending on order of scene objects)
 - ~~negative z-axis goes into the scene~~
 - ~~Parallelization~~
