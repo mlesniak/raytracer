@@ -47,6 +47,6 @@ objects:
       color: 0x0000FF
       center:
         x: 4.25
-        y: 5
+        y: 4.5
         z: -1
       radius: 0.5

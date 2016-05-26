@@ -17,15 +17,39 @@ import java.util.concurrent.TimeUnit;
  */
 public class Raytracer {
     private static final Logger LOG = LoggerFactory.getLogger(Raytracer.class);
+    private final SceneValues sceneValues;
 
     private Scene scene;
     private final ExecutorService executorService;
+
+    /**
+     * Store precomputed scene values which are relevant for each pixel.
+     */
+    private class SceneValues {
+        // Compute correct pixel and screen dimensions to compute the viewplane we are looking at.
+        final double fovRad = Math.PI * (scene.getFov() / 2) / 180;
+        final double ratio = (double) scene.getHeight() / scene.getWidth();
+        // We divide by 2 since we define the full FoV in the scene definition (which is more intuitive).
+        final double halfWidth = Math.tan(fovRad / 2);
+        final double halfHeight = halfWidth * ratio;
+        final double cameraWidth = halfWidth * 2;
+        final double cameraHeight = halfHeight * 2;
+        final double pixelWidth = cameraWidth / (scene.getWidth() - 1);
+        final double pixelHeight = cameraHeight / (scene.getHeight() - 1);
+
+        // Predefined static vectors.
+        final Vector3D cameraUp = new Vector3D(0, 1, 0);
+        final Vector3D eyeRay = scene.getCamera().path(scene.getLookAt()).normalize();
+        final Vector3D right = eyeRay.crossProduct(cameraUp);
+        final Vector3D up = right.crossProduct(eyeRay);
+    }
 
     public Raytracer(Scene scene) {
         this.scene = scene;
         int cores = Runtime.getRuntime().availableProcessors();
         LOG.info("Initialized executor service with {} cores", cores);
         executorService = Executors.newFixedThreadPool(cores);
+        sceneValues = new SceneValues();
     }
 
     public BufferedImage raytrace() {
@@ -60,45 +84,13 @@ public class Raytracer {
         return image;
     }
 
-    private void showStatistics(long duration) {
-        long pixels = scene.getWidth() * scene.getHeight();
-        long pixelPerMs = pixels / duration;
-        LOG.info("pixel={}, duration={}, pixel per ms = {}", pixels, duration, pixelPerMs);
-    }
-
     private int computePixel(Scene scene, int x, int y) {
-//        LOG.info("x={}, y={}", x, y);
+        // Compute position on the viewplane.
+        Vector3D xShift = sceneValues.right.scale(x * sceneValues.pixelWidth - sceneValues.halfWidth);
+        Vector3D yShift = sceneValues.up.scale(y * sceneValues.pixelHeight - sceneValues.halfHeight);
 
-        Vector3D camera = scene.getCamera();
-
-        // Current reference http://www.macwright.org/literate-raytracer/
-
-        // We need this in radians.
-        double fovRad = Math.PI * (scene.getFov() / 2) / 180; // TODO ML Understand formula
-        double ratio = (double) scene.getHeight() / scene.getWidth();
-        double halfWidth = Math.tan(fovRad / 2);
-        double halfHeight = halfWidth * ratio;
-        double cameraWidth = halfWidth * 2;
-        double cameraHeight = halfHeight * 2;
-        double pixelWidth = cameraWidth / (scene.getWidth() - 1);
-        double pixelHeight = cameraHeight / (scene.getHeight() - 1);
-
-        Vector3D eyeVector = camera.path(scene.getLookAt()).normalize();
-//        LOG.info("  eyeVector={}", eyeVector);
-
-        Vector3D vup = new Vector3D(0, 1, 0); //.normalize();
-        Vector3D right = eyeVector.crossProduct(vup);
-//        LOG.info("  right={}", right);
-        Vector3D up = right.crossProduct(eyeVector);
-//        LOG.info("  up={}", up);
-
-        Vector3D xcomp = right.scale(((double) x) * pixelWidth - halfWidth);
-//        LOG.info("  xcomp={}", xcomp);
-        Vector3D ycomp = up.scale(((double) y) * pixelHeight - halfHeight);
-//        LOG.info("  ycomp={}", ycomp);
-
-        Vector3D ray = eyeVector.add(xcomp).add(ycomp).normalize();
-//        LOG.info("  ray={}", ray);
+        // Compute ray from eye to position on viewplane.
+        Vector3D ray = sceneValues.eyeRay.add(xShift).add(yShift).normalize();
 
         // Check ray against all objects in the scene.
         int color = 0;
@@ -112,7 +104,9 @@ public class Raytracer {
         return color;
     }
 
-//    private int toRGB(int r, int g, int b) {
-//        return r << 16 | g << 8 | b;
-//    }
+    private void showStatistics(long duration) {
+        long pixels = scene.getWidth() * scene.getHeight();
+        long pixelPerMs = pixels / duration;
+        LOG.info("pixel={}, duration={}, pixel per ms = {}", pixels, duration, pixelPerMs);
+    }
 }
