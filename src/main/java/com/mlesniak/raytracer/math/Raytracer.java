@@ -103,12 +103,36 @@ public class Raytracer {
                 double objectDist = scene.getCamera().distance(intersection);
                 if (objectDist < minimalDistance) {
                     minimalDistance = objectDist;
+
+                    // Compute angle between ray and normal to compute color smoothing factor.
+                    // Currently we do not have light sources, hence the camera position is the only
+                    // light source.
+                    double factor = (-1) * object.normal(intersection).dot(ray);
                     color = object.getColor();
+                    int r = (color >> 16) & 0xFF;
+                    ;
+                    int g = (color >> 8) & 0xFF;
+                    ;
+                    int b = color & 0xFF;
+
+                    // Diffuse and ambient coefficient.
+                    double kd = 0.9;
+                    double ka = 0.25;
+
+                    r = (int) (kd * factor * r + ka * r);
+                    g = (int) (kd * factor * g + ka * g);
+                    b = (int) (kd * factor * b + ka * b);
+
+                    color = toRGB(r, g, b);
                 }
             }
         }
 
         return color;
+    }
+
+    private int toRGB(int r, int g, int b) {
+        return r << 16 | g << 8 | b;
     }
 
     private void showStatistics(long duration) {

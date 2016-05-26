@@ -28,4 +28,12 @@ public abstract class SceneObject {
      * @return true if intersects
      */
     public abstract Optional<Vector3D> intersect(Vector3D camera, Vector3D ray);
+
+    /**
+     * Compute the normal for the given intersection point.
+     *
+     * @param point intersection point.
+     * @return normal of this point.
+     */
+    public abstract Vector3D normal(Vector3D point);
 }

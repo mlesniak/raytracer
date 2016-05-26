@@ -2,13 +2,7 @@
 
 # Introduction
 
-A simple raytracer. All algorithms, ideas and designs are motivated by the book
-
-> An Introduction to Ray Tracing
-> Andrew S. Glassner et al.
-> 1989, The Morgan Kaufmann Series in Computer Graphics
-
-Note that the current state of this project is :boom: hacky :boom:, i.e. the code is not yet refactored, structured or 
+A simple raytracer. Note that the current state of this project is :boom: hacky :boom:, i.e. the code is not yet refactored, structured or 
 documented.
 
 # Gallery
@@ -35,11 +29,23 @@ Hence, as part of the build process we automatically check the code quality usin
 The corresponding configuration files are stored in ```src/main/resrouces/codestyle```. If any of these tools emit a 
 warning, the build fails.
 
+# Design remarks
+
+- Currently, Vector3D objects are *not* immutable since we need mutable objects with getter and setter
+for the YAML parser. One solution would be to have Parser objects and a conversion function but I do not like to
+have to object types with nearly the same purpose. One idea might be a ```lock``` state: after an object is locked, 
+any call to a setter (even to unlock) throws an exception?
+
+# References
+
+- An Introduction to Ray Tracing, Andrew S. Glassner et al., 1989, The Morgan Kaufmann Series in Computer Graphics
+- [Ray-tracing formulas](http://www.ccs.neu.edu/home/fell/CSU540/programs/RayTracingFormulas.htm)
+
 
 # Todo and planned features
 
 - ~~Implement standard FoV / Camera pattern~~
-- Gouraud Shading
+- **Gouraud Shading**
 - Phong Shading
 - Shadows / Lightning
 - Reflections
@@ -53,6 +59,7 @@ warning, the build fails.
 - ~~Choose nearest pixel in view (not depending on order of scene objects)~~
 - ~~negative z-axis goes into the scene~~
 - ~~Parallelization~~
+- Timed Unit-Test to find performance regressions? Will this work with TravisCI?
 
 # License
 

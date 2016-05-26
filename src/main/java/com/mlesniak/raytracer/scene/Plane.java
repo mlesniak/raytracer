@@ -36,6 +36,11 @@ public class Plane extends SceneObject {
         return Optional.of(camera.plus(ray.scale(t)));
     }
 
+    @Override
+    public Vector3D normal(Vector3D point) {
+        return normal;
+    }
+
     public Vector3D getPoint() {
         return point;
     }

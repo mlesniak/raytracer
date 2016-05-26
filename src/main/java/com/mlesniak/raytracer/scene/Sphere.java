@@ -41,6 +41,14 @@ public class Sphere extends SceneObject {
         return Optional.of(intersection);
     }
 
+    @Override
+    public Vector3D normal(Vector3D point) {
+        return new Vector3D(
+                (point.x - center.x) / radius,
+                (point.y - center.y) / radius,
+                (point.z - center.z) / radius).normalize();
+    }
+
     public Vector3D getCenter() {
         return center;
     }
