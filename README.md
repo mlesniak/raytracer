@@ -25,7 +25,9 @@ These images show progress and bugs while developing.
 
 # Quality
 
-As part of the build process we check the code quality using
+Clean code is important for me, and even when I hack around like (currently!) in this project,
+a minimal level of quality is necessary, e.g. to come back after a few days and not be totally lost. 
+Hence, as part of the build process we automatically check the code quality using
 
 - Checkstyle (in particular for source code formatting)
 - FindBugs
@@ -45,7 +47,7 @@ Copyright (c) 2016 Michael Lesniak, licensed under the Apache License.
 - Shadows / Lightning
 - Reflections
 - Materials such as glass
-~~- Plane as geometric object~~
+- ~~Plane as geometric object~~
 - Texture mapping
 - Antialiasing
 - Procedural generation
