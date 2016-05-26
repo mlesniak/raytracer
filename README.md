@@ -35,9 +35,6 @@ Hence, as part of the build process we automatically check the code quality usin
 The corresponding configuration files are stored in ```src/main/resrouces/codestyle```. If any of these tools emit a 
 warning, the build fails.
 
-# License
-
-Copyright (c) 2016 Michael Lesniak, licensed under the Apache License.
 
 # Todo and planned features
 
@@ -56,3 +53,7 @@ Copyright (c) 2016 Michael Lesniak, licensed under the Apache License.
 - Choose nearest pixel in view (not depending on order of scene objects)
 - ~~negative z-axis goes into the scene~~
 - ~~Parallelization~~
+
+# License
+
+Copyright (c) 2016 Michael Lesniak, licensed under the Apache License.
