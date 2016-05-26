@@ -2,6 +2,7 @@ package com.mlesniak.raytracer.math;
 
 import com.mlesniak.raytracer.scene.Scene;
 import com.mlesniak.raytracer.scene.SceneObject;
+import com.mlesniak.raytracer.util.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,7 @@ public class Raytracer {
     }
 
     public BufferedImage raytrace() {
-        long start = System.currentTimeMillis();
+        Stopwatch.start("raytrace");
         BufferedImage image = new BufferedImage(scene.getWidth(), scene.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         // Parallelize over lines.
@@ -53,13 +54,16 @@ public class Raytracer {
             throw new IllegalStateException("Timeout while awaiting computation");
         }
 
-        long end = System.currentTimeMillis();
-        long duration = end - start;
+        long duration = Stopwatch.stop("raytrace");
+        showStatistics(duration);
+
+        return image;
+    }
+
+    private void showStatistics(long duration) {
         long pixels = scene.getWidth() * scene.getHeight();
         long pixelPerMs = pixels / duration;
         LOG.info("pixel={}, duration={}, pixel per ms = {}", pixels, duration, pixelPerMs);
-
-        return image;
     }
 
     private int computePixel(Scene scene, int x, int y) {
