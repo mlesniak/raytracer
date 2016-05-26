@@ -110,9 +110,7 @@ public class Raytracer {
                     double factor = (-1) * object.normal(intersection).dot(ray);
                     color = object.getColor();
                     int r = (color >> 16) & 0xFF;
-                    ;
                     int g = (color >> 8) & 0xFF;
-                    ;
                     int b = color & 0xFF;
 
                     // Diffuse and ambient coefficient.
