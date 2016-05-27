@@ -51,7 +51,7 @@ any call to a setter (even to unlock) throws an exception?
 - ~~Implement standard FoV / Camera pattern~~
 - ~~Gouraud Shading~~
 - Phong Shading
-- **Shadows / Lightning**
+- ~~Shadows / Lightning~~
 - Reflections
 - Materials such as glass
 - ~~Plane as geometric object~~
@@ -64,7 +64,7 @@ any call to a setter (even to unlock) throws an exception?
 - ~~negative z-axis goes into the scene~~
 - ~~Parallelization~~
 - Timed Unit-Test to find performance regressions? Will this work with TravisCI?
-- White areas instead of black ones at the border or spheres?
+- **White areas instead of black ones at the border or spheres?**
 
 # License
 
