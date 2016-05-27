@@ -52,7 +52,7 @@ objects:
       color: 0x0000FF
       center:
         x: 6
-        y: 6
+        y: 5.5
         z: 0
       radius: 0.25
   - !com.mlesniak.raytracer.scene.Plane
