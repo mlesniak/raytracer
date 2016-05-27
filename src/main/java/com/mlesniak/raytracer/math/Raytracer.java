@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.image.BufferedImage;
+import java.text.NumberFormat;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -54,9 +55,9 @@ public class Raytracer {
 
     public BufferedImage raytrace() {
         Stopwatch.start("raytrace");
-        BufferedImage image = new BufferedImage(scene.getWidth(), scene.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         // Parallelize over lines.
+        int[][] pixels = new int[scene.getWidth()][scene.getHeight()];
         for (int y = 0; y < scene.getHeight(); y++) {
             final int line = y;
             executorService.execute(() -> {
@@ -64,7 +65,7 @@ public class Raytracer {
                     int rgb = computePixel(scene, x, line);
                     // Image and mathematical coordinate systems are different,
                     // hence we have to flip w.r.t to the y-axis.
-                    image.setRGB(x, scene.getHeight() - line - 1, rgb);
+                    pixels[x][scene.getHeight() - line - 1] = rgb;
                 }
             });
         }
@@ -76,6 +77,14 @@ public class Raytracer {
         } catch (InterruptedException e) {
             LOG.error("We waited {} days. This should never happen.", Long.MAX_VALUE);
             throw new IllegalStateException("Timeout while awaiting computation");
+        }
+
+        // Copy raw data to java image.
+        BufferedImage image = new BufferedImage(scene.getWidth(), scene.getHeight(), BufferedImage.TYPE_INT_RGB);
+        for (int y = 0; y < scene.getHeight(); y++) {
+            for (int x = 0; x < scene.getWidth(); x++) {
+                image.setRGB(x, y, pixels[x][y]);
+            }
         }
 
         long duration = Stopwatch.stop("raytrace");
@@ -148,6 +157,7 @@ public class Raytracer {
     private void showStatistics(long duration) {
         long pixels = scene.getWidth() * scene.getHeight();
         long pixelPerMs = pixels / duration;
-        LOG.info("pixel={}, duration={}, pixel per ms = {}", pixels, duration, pixelPerMs);
+        LOG.info("pixel={}, duration={}, pixel per ms = {}, pixel per sec = {}", pixels, duration, pixelPerMs,
+                NumberFormat.getIntegerInstance().format(pixelPerMs * 1000));
     }
 }
