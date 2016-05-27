@@ -54,6 +54,7 @@ any call to a setter (even to unlock) throws an exception?
 
 # Todo and planned features
 
+- SonarQube integration with [sonarqube-badges](https://github.com/QualInsight/qualinsight-plugins-sonarqube-badges)
 - Multiple light sources (needs refactoring)
 - Phong Shading
 - Reflections
