@@ -105,11 +105,10 @@ public class Raytracer {
                     minimalDistance = objectDist;
 
                     // Compute angle between ray and normal to compute color smoothing factor.
-                    // Currently we do not have light sources, hence the camera position is the only
-                    // light source.
                     Vector3D n = object.normal(intersection);
-                    // We do not have a light, hence we use the intersection to camera.
-                    Vector3D path = intersection.path(scene.getCamera()).normalize();
+                    // We only have one light source, use this.
+                    Vector3D light = scene.getLights().get(0);
+                    Vector3D path = intersection.path(light).normalize();
                     double factor = n.dot(path);
                     color = object.getColor();
                     int r = (color >> 16) & 0xFF;

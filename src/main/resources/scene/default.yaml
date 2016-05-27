@@ -22,8 +22,8 @@ fov: 90
 
 lights:
   - !com.mlesniak.raytracer.math.Vector3D
-    x: 5
-    y: 5
+    x: 8
+    y: 7
     z: 5
 
 objects:
