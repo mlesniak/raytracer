@@ -18,6 +18,7 @@ These images show progress and bugs while developing.
 ![Commit d5ba2cc](gallery/image-d5ba2cc.png?raw=true)
 ![Commit 72f62ba](gallery/image-72f62ba.png?raw=true)
 ![Commit 54d82c1](gallery/image-54d82c1.png?raw=true)
+![Commit 9e0ce99](gallery/image-9e0ce99.png?raw=true)
 
 # Quality
 
