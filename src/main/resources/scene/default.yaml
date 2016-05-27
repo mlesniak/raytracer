@@ -27,13 +27,13 @@ lights:
     z: 5
 
 objects:
-#  - !com.mlesniak.raytracer.scene.Sphere
-#    color: 0xFFFF00
-#    center:
-#      x: 3
-#      y: 3
-#      z: -2
-#    radius: 0.5
+  - !com.mlesniak.raytracer.scene.Sphere
+    color: 0xFFFF00
+    center:
+      x: 3
+      y: 3
+      z: -2
+    radius: 0.5
   - !com.mlesniak.raytracer.scene.Sphere
     color: 0xFF0000
     center:
