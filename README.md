@@ -63,6 +63,7 @@ any call to a setter (even to unlock) throws an exception?
 - ~~negative z-axis goes into the scene~~
 - ~~Parallelization~~
 - Timed Unit-Test to find performance regressions? Will this work with TravisCI?
+- White areas instead of black ones at the border or spheres?
 
 # License
 

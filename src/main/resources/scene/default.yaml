@@ -23,17 +23,17 @@ fov: 90
 lights:
   - !com.mlesniak.raytracer.math.Vector3D
     x: 8
-    y: 7
+    y: 8
     z: 5
 
 objects:
-  - !com.mlesniak.raytracer.scene.Sphere
-    color: 0xFFFF00
-    center:
-      x: 3
-      y: 3
-      z: -2
-    radius: 0.5
+#  - !com.mlesniak.raytracer.scene.Sphere
+#    color: 0xFFFF00
+#    center:
+#      x: 3
+#      y: 3
+#      z: -2
+#    radius: 0.5
   - !com.mlesniak.raytracer.scene.Sphere
     color: 0xFF0000
     center:
@@ -51,11 +51,10 @@ objects:
   - !com.mlesniak.raytracer.scene.Sphere
       color: 0x0000FF
       center:
-        x: 4.25
-        y: 4.5
-        z: -1
-      radius: 0.5
-
+        x: 6
+        y: 6
+        z: 0
+      radius: 0.25
   - !com.mlesniak.raytracer.scene.Plane
       color: 0xFF00FF
       point:

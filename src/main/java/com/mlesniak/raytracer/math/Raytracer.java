@@ -133,6 +133,27 @@ public class Raytracer {
                     b = (int) (kd * factor * b + ka * b);
 
                     color = toRGB(r, g, b);
+
+                    // Quick hack to have something working: Check if the intersection has a visible path to the
+                    // light source. If not, use shadow color. This approach needs to be refactored for performance
+                    // (move code up) and generality (more light sources):
+                    Vector3D raytoLight = intersection.path(light).normalize();
+                    for (SceneObject shadowObject : scene.getObjects()) {
+                        if (shadowObject == object) {
+                            continue;
+                        }
+                        Optional<Vector3D> lightIntersection = shadowObject.intersect(intersection, raytoLight);
+                        if (lightIntersection.isPresent()) {
+                            // Check that the intersection is nearer to the light source than the current intersection.
+                            Vector3D li = lightIntersection.get();
+                            double lightDist = li.distance(light);
+                            if (lightDist < minimalDistance) {
+                                // One object between light source and intersection is enough to be in shadow.
+                                color = 0;
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
