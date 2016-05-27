@@ -26,6 +26,8 @@ public class Scene {
     private Vector3D lookAt;
     private double fov;
 
+    private List<Vector3D> lights;
+
     private List<SceneObject> objects;
 
     public String getFilename() {
@@ -34,6 +36,14 @@ public class Scene {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public List<Vector3D> getLights() {
+        return lights;
+    }
+
+    public void setLights(List<Vector3D> lights) {
+        this.lights = lights;
     }
 
     public Vector3D getCamera() {

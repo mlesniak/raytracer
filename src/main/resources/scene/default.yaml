@@ -20,6 +20,11 @@ lookAt:
 # Field of View
 fov: 90
 
+lights:
+  - !com.mlesniak.raytracer.math.Vector3D
+    x: 5
+    y: 5
+    z: 5
 
 objects:
   - !com.mlesniak.raytracer.scene.Sphere
