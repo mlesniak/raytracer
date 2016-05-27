@@ -27,6 +27,7 @@ lights:
     z: 5
 
 objects:
+  # Yellow sphere
   - !com.mlesniak.raytracer.scene.Sphere
     color: 0xFFFF00
     center:
@@ -34,6 +35,7 @@ objects:
       y: 3
       z: -2
     radius: 0.5
+  # Red sphere
   - !com.mlesniak.raytracer.scene.Sphere
     color: 0xFF0000
     center:
@@ -41,6 +43,7 @@ objects:
       y: 7
       z: -3
     radius: 0.25
+  # Yellow sphere
   - !com.mlesniak.raytracer.scene.Sphere
       color: 0x00FF00
       center:
@@ -48,6 +51,7 @@ objects:
         y: 5
         z: -2
       radius: 1
+  # Blue sphere
   - !com.mlesniak.raytracer.scene.Sphere
       color: 0x0000FF
       center:
@@ -55,6 +59,8 @@ objects:
         y: 5.5
         z: 0
       radius: 0.25
+
+  # Plane
   - !com.mlesniak.raytracer.scene.Plane
       color: 0xFF00FF
       point:
