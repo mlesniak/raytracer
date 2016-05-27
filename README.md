@@ -58,10 +58,14 @@ any call to a setter (even to unlock) throws an exception?
 - Phong Shading
 - Reflections
 - Procedural generation
+- Box support
 - Texture mapping
 - Materials such as glass
 - Antialiasing
 - Animation support
+- Global illumination
+- Famous room rendering scene
+- Better parallelization (and benchmarks)
 - Support for external file formats (SketchUp? Blender?)
 - Timed Unit-Test to find performance regressions? Will this work with TravisCI?
 - ~~Shadows / Lightning~~
