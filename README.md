@@ -42,6 +42,9 @@ for the YAML parser. One solution would be to have Parser objects and a conversi
 have to object types with nearly the same purpose. One idea might be a ```lock``` state: after an object is locked, 
 any call to a setter (even to unlock) throws an exception?
 
+- I experiment in this project with with micro commits, that is a lot of commits even for small
+    semantic independent changes.
+
 # References
 
 - An Introduction to Ray Tracing, Andrew S. Glassner et al., 1989, The Morgan Kaufmann Series in Computer Graphics
