@@ -124,8 +124,6 @@ public class Raytracer {
                     g = (int) (kd * factor * g + ka * g);
                     b = (int) (kd * factor * b + ka * b);
 
-                    LOG.info("r={}, g={}, b={}", r, g, b);
-
                     color = toRGB(r, g, b);
                 }
             }
