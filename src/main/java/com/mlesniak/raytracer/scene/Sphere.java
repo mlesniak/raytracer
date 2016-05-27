@@ -36,7 +36,7 @@ public class Sphere extends SceneObject {
 
         double t = Math.min(t0, t1);
         // Intersection point is...
-        Vector3D intersection = new Vector3D(camera.x + ray.x * t, camera.z + ray.z * t, camera.z + ray.z * t);
+        Vector3D intersection = new Vector3D(camera.x + ray.x * t, camera.y + ray.y * t, camera.z + ray.z * t);
 
         return Optional.of(intersection);
     }

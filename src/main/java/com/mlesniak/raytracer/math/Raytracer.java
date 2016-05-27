@@ -59,7 +59,7 @@ public class Raytracer {
         // Parallelize over lines.
         for (int y = 0; y < scene.getHeight(); y++) {
             final int line = y;
-            executorService.execute((Runnable) () -> {
+            executorService.execute(() -> {
                 for (int x = 0; x < scene.getWidth(); x++) {
                     int rgb = computePixel(scene, x, line);
                     // Image and mathematical coordinate systems are different,
@@ -107,7 +107,10 @@ public class Raytracer {
                     // Compute angle between ray and normal to compute color smoothing factor.
                     // Currently we do not have light sources, hence the camera position is the only
                     // light source.
-                    double factor = (-1) * object.normal(intersection).dot(ray);
+                    Vector3D n = object.normal(intersection);
+                    // We do not have a light, hence we use the intersection to camera.
+                    Vector3D path = intersection.path(scene.getCamera()).normalize();
+                    double factor = n.dot(path);
                     color = object.getColor();
                     int r = (color >> 16) & 0xFF;
                     int g = (color >> 8) & 0xFF;
@@ -115,11 +118,13 @@ public class Raytracer {
 
                     // Diffuse and ambient coefficient.
                     double kd = 0.9;
-                    double ka = 0.25;
+                    double ka = 0.2;
 
                     r = (int) (kd * factor * r + ka * r);
                     g = (int) (kd * factor * g + ka * g);
                     b = (int) (kd * factor * b + ka * b);
+
+                    LOG.info("r={}, g={}, b={}", r, g, b);
 
                     color = toRGB(r, g, b);
                 }
@@ -130,6 +135,16 @@ public class Raytracer {
     }
 
     private int toRGB(int r, int g, int b) {
+        if (r > 255) {
+            r = 255;
+        }
+        if (g > 255) {
+            g = 255;
+        }
+        if (b > 255) {
+            b = 255;
+        }
+
         return r << 16 | g << 8 | b;
     }
 

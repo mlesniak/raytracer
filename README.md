@@ -46,9 +46,9 @@ any call to a setter (even to unlock) throws an exception?
 # Todo and planned features
 
 - ~~Implement standard FoV / Camera pattern~~
-- **Gouraud Shading**
+- ~~Gouraud Shading~~
 - Phong Shading
-- Shadows / Lightning
+- **Shadows / Lightning**
 - Reflections
 - Materials such as glass
 - ~~Plane as geometric object~~
