@@ -34,6 +34,11 @@ public class Sphere extends SceneObject {
         double t0 = (-b - Math.sqrt(disc)) / 2;
         double t1 = (-b + Math.sqrt(disc)) / 2;
 
+        if (t0 < 0) {
+            // Intersection is behind the eye, i.e. not visible.
+            return Optional.empty();
+        }
+
         double t = Math.min(t0, t1);
         // Intersection point is...
         Vector3D intersection = new Vector3D(camera.x + ray.x * t, camera.y + ray.y * t, camera.z + ray.z * t);

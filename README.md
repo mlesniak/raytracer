@@ -53,24 +53,25 @@ any call to a setter (even to unlock) throws an exception?
 
 # Todo and planned features
 
-- ~~Implement standard FoV / Camera pattern~~
-- ~~Gouraud Shading~~
+- Multiple light sources (needs refactoring)
 - Phong Shading
-- ~~Shadows / Lightning~~
 - Reflections
-- Materials such as glass
-- ~~Plane as geometric object~~
-- Texture mapping
-- Antialiasing
 - Procedural generation
+- Texture mapping
+- Materials such as glass
+- Antialiasing
 - Animation support
 - Support for external file formats (SketchUp? Blender?)
+- Timed Unit-Test to find performance regressions? Will this work with TravisCI?
+- ~~Shadows / Lightning~~
+- ~~Plane as geometric object~~
 - ~~Choose nearest pixel in view (not depending on order of scene objects)~~
 - ~~negative z-axis goes into the scene~~
 - ~~Parallelization~~
-- Timed Unit-Test to find performance regressions? Will this work with TravisCI?
+- ~~Implement standard FoV / Camera pattern~~
+- ~~Gouraud Shading~~
 - ~~White areas instead of black ones at the border or spheres?~~
-- **Fix shadow bugs (See commit 0052291)**
+- ~~Fix shadow bugs (See commit 0052291)~~
 
 # License
 
