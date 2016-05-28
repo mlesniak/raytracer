@@ -1,6 +1,6 @@
 [![Build Status](http://jenkins.mlesniak.com/buildStatus/icon?job=raytracer)](http://jenkins.mlesniak
 .com/job/raytracer/)
-[![Quality status](http://sonarqube.mlesniak.com/api/badges/gate?key=com.mlesniak:raytracer)](http://sonarqube.mlesniak.com/api/badges/gate?key=com.mlesniak:raytracer)
+[![Quality status](http://sonarqube.mlesniak.com/api/badges/gate?key=com.mlesniak:raytracer)](http://sonarqube.mlesniak.com/overview?id=com.mlesniak%3Araytracer)
 
     
     
