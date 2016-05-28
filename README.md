@@ -58,6 +58,35 @@ any call to a setter (even to unlock) throws an exception?
 - I experiment in this project with with micro commits, that is a lot of commits even for small
     semantic independent changes.
 
+# Animation support
+
+By defining animation properties in a scene an animated .gif is generated instead of a .png. Add the 
+```animation``` property in the scene
+
+    animation:
+      file: src/main/resources/scene/default.js
+      ticks: 24
+      # Duration in ms
+      duration: 1000
+      loop: true
+      
+and write JavaScript code to modify the scene on each tick, e.g.
+      
+      var direction = 1;
+      if (tick > ticks / 2) {
+          direction = -1;
+      }
+      var xTickStep = 0.1;
+      var yTickStep = 0.2;
+      
+      var radiusStep = 0.05;
+      
+      scene.objects[2].radius = scene.objects[2].radius + radiusStep * direction;
+      
+      scene.lights[0].y = scene.lights[0].y + yTickStep * direction;
+      scene.lights[0].x = scene.lights[0].x + xTickStep * direction;
+
+
 # References
 
 - An Introduction to Ray Tracing, Andrew S. Glassner et al., 1989, The Morgan Kaufmann Series in Computer Graphics
