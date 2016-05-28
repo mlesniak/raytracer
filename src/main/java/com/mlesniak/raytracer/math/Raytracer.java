@@ -178,7 +178,7 @@ public class Raytracer {
     }
 
     private void showStatistics(long duration) {
-        long pixels = (long)scene.getWidth() * scene.getHeight();
+        long pixels = (long) scene.getWidth() * scene.getHeight();
         long pixelPerMs = pixels / duration;
         LOG.info("pixel={}, duration={}, pixel per ms = {}, pixel per sec = {}", pixels, duration, pixelPerMs,
                 NumberFormat.getIntegerInstance().format(pixelPerMs * 1000));
