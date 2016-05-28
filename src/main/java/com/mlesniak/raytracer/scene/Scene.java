@@ -26,6 +26,54 @@ public class Scene {
     private Vector3D lookAt;
     private double fov;
 
+    private AnimationSettings animation;
+
+    /**
+     * Animation settings.
+     */
+    public static class AnimationSettings {
+        private String file;
+        private int ticks;
+        private int duration;
+        private boolean loop;
+
+        public AnimationSettings() {
+            // For YAML parsing.
+        }
+
+        public int getDuration() {
+            return duration;
+        }
+
+        public void setDuration(int duration) {
+            this.duration = duration;
+        }
+
+        public boolean getLoop() {
+            return loop;
+        }
+
+        public void setLoop(boolean loop) {
+            this.loop = loop;
+        }
+
+        public String getFile() {
+            return file;
+        }
+
+        public void setFile(String file) {
+            this.file = file;
+        }
+
+        public int getTicks() {
+            return ticks;
+        }
+
+        public void setTicks(int ticks) {
+            this.ticks = ticks;
+        }
+    }
+
     private List<Vector3D> lights;
 
     private List<SceneObject> objects;
@@ -92,6 +140,14 @@ public class Scene {
 
     public void setFov(double fov) {
         this.fov = fov;
+    }
+
+    public AnimationSettings getAnimation() {
+        return animation;
+    }
+
+    public void setAnimation(AnimationSettings animation) {
+        this.animation = animation;
     }
 
     public static Scene readScene(String filename) throws IOException {

@@ -17,6 +17,13 @@ lookAt:
   y: 5
   z: 0
 
+animation:
+  file: src/main/resources/scene/default.js
+  ticks: 24
+  # Duration in ms
+  duration: 1000
+  loop: true
+
 # Field of View
 fov: 90
 
@@ -59,13 +66,12 @@ objects:
         y: 5.5
         z: 0
       radius: 0.25
-
   # Plane
   - !com.mlesniak.raytracer.scene.Plane
-      color: 0xFF00FF
+      color: 0xDDDDDD
       point:
         x: 0
-        y: 0
+        y: 2
         z: 0
       normal:
         x: 0

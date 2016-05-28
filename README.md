@@ -64,9 +64,8 @@ any call to a setter (even to unlock) throws an exception?
 
 # Todo and planned features
 
-- Animation support (might also ease debugging)
-- Multiple light sources (needs refactoring), and soft shadows, otherwise it's boring since we have no shadows anymore
 - Phong Shading
+- Multiple light sources (needs refactoring), and soft shadows, otherwise it's boring since we have no shadows anymore
 - Reflections
 - Procedural generation
 - Box support
@@ -88,6 +87,7 @@ any call to a setter (even to unlock) throws an exception?
 - ~~White areas instead of black ones at the border or spheres?~~
 - ~~Fix shadow bugs (See commit 0052291)~~
 - ~~SonarQube integration with [sonarqube-badges](https://github.com/QualInsight/qualinsight-plugins-sonarqube-badges)~~
+- ~~Animation support (might also ease debugging)~~
 
 # License
 
