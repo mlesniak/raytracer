@@ -43,7 +43,7 @@ warning, the build fails.
 In addition, we use SonarQube with its default profile to analyse the source. If **any** warning is emitted, the build 
 fails, too. This is implemented by a very strict quality gate:
  
-![Quality gate](gallery/strict-quality-gate.png) 
+![Quality gate](gallery/strict-quality-gate.png | width=300) 
 
 # Design remarks
 
