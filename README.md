@@ -1,6 +1,10 @@
 [![Build Status](http://jenkins.mlesniak.com/buildStatus/icon?job=raytracer)](http://jenkins.mlesniak
 .com/job/raytracer/)
     
+[![Quality status](http://sonarqube.mlesniak.com/api/badges/gate?key=com.mlesniak:raytracer)](http://sonarqube.mlesniak.com/api/badges/gate?key=com.mlesniak:raytracer)
+
+    
+    
 # Introduction
 
 A simple raytracer. Note that the current state of this project is :boom: hacky :boom:, i.e. the code is not yet refactored, structured or 
@@ -29,13 +33,18 @@ These images show progress and bugs while developing.
 
 Clean code is important for me, and even when I hack around like (currently!) in this project,
 a minimal level of quality is necessary, e.g. to come back after a few days and not be totally lost. 
-Hence, as part of the build process we automatically check the code quality using
+Hence, as part of the Maven build process we automatically check the code quality using
 
 - Checkstyle (in particular for source code formatting)
 - FindBugs
 
 The corresponding configuration files are stored in ```src/main/resrouces/codestyle```. If any of these tools emit a 
 warning, the build fails.
+
+In addition, we use SonarQube with its default profile to analyse the source. If **any** warning is emitted, the build 
+fails, too. This is implemented by a very strict quality gate:
+ 
+![Quality gate](gallery/strict-quality-gate.png) 
 
 # Design remarks
 
