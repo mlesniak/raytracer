@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mlesniak/raytracer.svg?branch=master)](https://travis-ci.org/mlesniak/raytracer)
+[![Build Status](http://mlesniak.com:8888/buildStatus/icon?job=raytracer)](http://mlesniak.com:8888/job/raytracer/)
 
 # Introduction
 
@@ -55,7 +55,8 @@ any call to a setter (even to unlock) throws an exception?
 # Todo and planned features
 
 - SonarQube integration with [sonarqube-badges](https://github.com/QualInsight/qualinsight-plugins-sonarqube-badges)
-- Multiple light sources (needs refactoring)
+- Animation support (might also ease debugging)
+- Multiple light sources (needs refactoring), and soft shadows, otherwise it's boring since we have no shadows anymore
 - Phong Shading
 - Reflections
 - Procedural generation
@@ -63,7 +64,6 @@ any call to a setter (even to unlock) throws an exception?
 - Texture mapping
 - Materials such as glass
 - Antialiasing
-- Animation support
 - Global illumination
 - Famous room rendering scene
 - Better parallelization (and benchmarks)
