@@ -26,7 +26,7 @@ import java.util.Iterator;
  * Source: http://elliot.kroo.net/software/java/GifSequenceWriter/
  */
 public class GifWriter {
-    protected ImageWriter gifWriter;
+    protected ImageWriter gifImageWriter;
     protected ImageWriteParam imageWriteParam;
     protected IIOMetadata imageMetaData;
 
@@ -45,13 +45,13 @@ public class GifWriter {
             int timeBetweenFramesMS,
             boolean loopContinuously) throws IOException {
         // my method to create a writer
-        gifWriter = getWriter();
-        imageWriteParam = gifWriter.getDefaultWriteParam();
+        gifImageWriter = getWriter();
+        imageWriteParam = gifImageWriter.getDefaultWriteParam();
         ImageTypeSpecifier imageTypeSpecifier =
                 ImageTypeSpecifier.createFromBufferedImageType(imageType);
 
         imageMetaData =
-                gifWriter.getDefaultImageMetadata(imageTypeSpecifier,
+                gifImageWriter.getDefaultImageMetadata(imageTypeSpecifier,
                         imageWriteParam);
 
         String metaFormatName = imageMetaData.getNativeMetadataFormatName();
@@ -98,13 +98,13 @@ public class GifWriter {
 
         imageMetaData.setFromTree(metaFormatName, root);
 
-        gifWriter.setOutput(outputStream);
+        gifImageWriter.setOutput(outputStream);
 
-        gifWriter.prepareWriteSequence(null);
+        gifImageWriter.prepareWriteSequence(null);
     }
 
     public void writeToSequence(RenderedImage img) throws IOException {
-        gifWriter.writeToSequence(new IIOImage(img, null, imageMetaData), imageWriteParam);
+        gifImageWriter.writeToSequence(new IIOImage(img, null, imageMetaData), imageWriteParam);
     }
 
     /**
@@ -114,7 +114,7 @@ public class GifWriter {
      * @throws IOException on IO error
      */
     public void close() throws IOException {
-        gifWriter.endWriteSequence();
+        gifImageWriter.endWriteSequence();
     }
 
     /**
@@ -148,11 +148,11 @@ public class GifWriter {
         for (int i = 0; i < nNodes; i++) {
             if (rootNode.item(i).getNodeName().compareToIgnoreCase(nodeName)
                     == 0) {
-                return ((IIOMetadataNode) rootNode.item(i));
+                return (IIOMetadataNode) rootNode.item(i);
             }
         }
         IIOMetadataNode node = new IIOMetadataNode(nodeName);
         rootNode.appendChild(node);
-        return (node);
+        return node;
     }
 }
