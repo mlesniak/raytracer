@@ -138,20 +138,27 @@ public class Raytracer {
                     // light source. If not, use shadow color. This approach needs to be refactored for performance
                     // (move code up) and generality (more light sources):
                     Vector3D raytoLight = intersection.path(light).normalize();
-                    for (SceneObject shadowObject : scene.getObjects()) {
-                        if (shadowObject == object) {
-                            continue;
-                        }
-                        Optional<Vector3D> lightIntersection =
-                                shadowObject.computeIntersection(intersection, raytoLight);
-                        if (lightIntersection.isPresent()) {
-                            color = 0;
-                        }
-                    }
+                    color = checkLightIntersection(scene, color, object, intersection, raytoLight);
                 }
             }
         }
 
+        return color;
+    }
+
+    // Beginning of refactoring for phong shading.
+    private int checkLightIntersection(Scene scene, int color, SceneObject object, Vector3D intersection, Vector3D
+            raytoLight) {
+        for (SceneObject shadowObject : scene.getObjects()) {
+            if (shadowObject == object) {
+                continue;
+            }
+            Optional<Vector3D> lightIntersection =
+                    shadowObject.computeIntersection(intersection, raytoLight);
+            if (lightIntersection.isPresent()) {
+                color = 0;
+            }
+        }
         return color;
     }
 
