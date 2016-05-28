@@ -149,6 +149,7 @@ public class Raytracer {
     // Beginning of refactoring for phong shading.
     private int checkLightIntersection(Scene scene, int color, SceneObject object, Vector3D intersection, Vector3D
             raytoLight) {
+        int updatedColor = color;
         for (SceneObject shadowObject : scene.getObjects()) {
             if (shadowObject == object) {
                 continue;
@@ -156,10 +157,10 @@ public class Raytracer {
             Optional<Vector3D> lightIntersection =
                     shadowObject.computeIntersection(intersection, raytoLight);
             if (lightIntersection.isPresent()) {
-                color = 0;
+                updatedColor = 0;
             }
         }
-        return color;
+        return updatedColor;
     }
 
     private int toRGB(int r, int g, int b) {
