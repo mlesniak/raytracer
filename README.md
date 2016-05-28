@@ -6,8 +6,8 @@
     
 # Introduction
 
-A simple raytracer. Note that the current state of this project is :boom: hacky :boom:, i.e. the code is not yet refactored, structured or 
-documented.
+A simple raytracer using nothing but plain Java, a few helper classes, linerar algebra and physics. Note that the 
+current state of this project is :boom: hacky :boom:, i .e. the code is not yet refactored, structured or documented.
 
 # Gallery
 
