@@ -16,8 +16,12 @@ import java.util.Optional;
  *
  * @author Michael Lesniak (mlesniak@micromata.de)
  */
-public class Main {
+public final class Main {
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
+
+    private Main() {
+        // Empty.
+    }
 
     public static void main(String[] args) throws Exception {
         LOG.info("Application starting");

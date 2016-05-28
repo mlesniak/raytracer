@@ -13,6 +13,7 @@ public class Vector3D {
     public double z;
 
     public Vector3D() {
+        // Necessary for YAML parser.
     }
 
     public Vector3D(double x, double y, double z) {

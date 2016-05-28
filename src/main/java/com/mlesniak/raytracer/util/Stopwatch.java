@@ -8,8 +8,11 @@ import java.util.Map;
  *
  * @author Michael Lesniak (mlesniak@micromata.de)
  */
-public class Stopwatch {
+public final class Stopwatch {
     private static Map<String, Long> startTimes = new HashMap<>();
+
+    private Stopwatch() {
+    }
 
     public static void start(String id) {
         startTimes.put(id, System.currentTimeMillis());

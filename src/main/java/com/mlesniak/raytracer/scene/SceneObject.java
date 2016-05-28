@@ -27,7 +27,7 @@ public abstract class SceneObject {
      * @param ray    ray to check against intersection.
      * @return true if intersects
      */
-    public abstract Optional<Vector3D> intersect(Vector3D camera, Vector3D ray);
+    public abstract Optional<Vector3D> computeIntersection(Vector3D camera, Vector3D ray);
 
     /**
      * Compute the normal for the given intersection point.
@@ -35,5 +35,5 @@ public abstract class SceneObject {
      * @param point intersection point.
      * @return normal of this point.
      */
-    public abstract Vector3D normal(Vector3D point);
+    public abstract Vector3D computeNormal(Vector3D point);
 }

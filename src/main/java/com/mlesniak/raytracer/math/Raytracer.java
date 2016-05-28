@@ -28,21 +28,21 @@ public class Raytracer {
      */
     private class SceneValues {
         // Compute correct pixel and screen dimensions to compute the viewplane we are looking at.
-        final double fovRad = Math.PI * (scene.getFov() / 2) / 180;
-        final double ratio = (double) scene.getHeight() / scene.getWidth();
+        double fovRad = Math.PI * (scene.getFov() / 2) / 180;
+        double ratio = (double) scene.getHeight() / scene.getWidth();
         // We divide by 2 since we define the full FoV in the scene definition (which is more intuitive).
-        final double halfWidth = Math.tan(fovRad / 2);
-        final double halfHeight = halfWidth * ratio;
-        final double cameraWidth = halfWidth * 2;
-        final double cameraHeight = halfHeight * 2;
-        final double pixelWidth = cameraWidth / (scene.getWidth() - 1);
-        final double pixelHeight = cameraHeight / (scene.getHeight() - 1);
+        double halfWidth = Math.tan(fovRad / 2);
+        double halfHeight = halfWidth * ratio;
+        double cameraWidth = halfWidth * 2;
+        double cameraHeight = halfHeight * 2;
+        double pixelWidth = cameraWidth / (scene.getWidth() - 1);
+        double pixelHeight = cameraHeight / (scene.getHeight() - 1);
 
         // Predefined static vectors.
-        final Vector3D cameraUp = new Vector3D(0, 1, 0);
-        final Vector3D eyeRay = scene.getCamera().path(scene.getLookAt()).normalize();
-        final Vector3D right = eyeRay.crossProduct(cameraUp);
-        final Vector3D up = right.crossProduct(eyeRay);
+        Vector3D cameraUp = new Vector3D(0, 1, 0);
+        Vector3D eyeRay = scene.getCamera().path(scene.getLookAt()).normalize();
+        Vector3D right = eyeRay.crossProduct(cameraUp);
+        Vector3D up = right.crossProduct(eyeRay);
     }
 
     public Raytracer(Scene scene) {
@@ -105,7 +105,7 @@ public class Raytracer {
         int color = 0;
         double minimalDistance = Double.MAX_VALUE;
         for (SceneObject object : scene.getObjects()) {
-            Optional<Vector3D> oi = object.intersect(scene.getCamera(), ray);
+            Optional<Vector3D> oi = object.computeIntersection(scene.getCamera(), ray);
             if (oi.isPresent()) {
                 // Check length to camera.
                 Vector3D intersection = oi.get();
@@ -114,7 +114,7 @@ public class Raytracer {
                     minimalDistance = objectDist;
 
                     // Compute angle between ray and normal to compute color smoothing factor.
-                    Vector3D n = object.normal(intersection);
+                    Vector3D n = object.computeNormal(intersection);
                     // We only have one light source, use this.
                     Vector3D light = scene.getLights().get(0);
                     Vector3D path = intersection.path(light).normalize();
@@ -142,7 +142,8 @@ public class Raytracer {
                         if (shadowObject == object) {
                             continue;
                         }
-                        Optional<Vector3D> lightIntersection = shadowObject.intersect(intersection, raytoLight);
+                        Optional<Vector3D> lightIntersection =
+                                shadowObject.computeIntersection(intersection, raytoLight);
                         if (lightIntersection.isPresent()) {
                             color = 0;
                         }
@@ -155,26 +156,29 @@ public class Raytracer {
     }
 
     private int toRGB(int r, int g, int b) {
-        if (r > 255) {
-            r = 255;
+        int rFixed = r;
+        int gFixed = g;
+        int bFixed = b;
+        if (rFixed > 255) {
+            rFixed = 255;
         }
-        if (r < 0) {
-            r = 0;
+        if (rFixed < 0) {
+            rFixed = 0;
         }
-        if (g > 255) {
-            g = 255;
+        if (gFixed > 255) {
+            gFixed = 255;
         }
-        if (g < 0) {
-            g = 0;
+        if (gFixed < 0) {
+            gFixed = 0;
         }
-        if (b > 255) {
-            b = 255;
+        if (bFixed > 255) {
+            bFixed = 255;
         }
-        if (b < 0) {
-            b = 0;
+        if (bFixed < 0) {
+            bFixed = 0;
         }
 
-        return r << 16 | g << 8 | b;
+        return rFixed << 16 | gFixed << 8 | bFixed;
     }
 
     private void showStatistics(long duration) {

@@ -19,7 +19,7 @@ public class Plane extends SceneObject {
     }
 
     @Override
-    public Optional<Vector3D> intersect(Vector3D camera, Vector3D ray) {
+    public Optional<Vector3D> computeIntersection(Vector3D camera, Vector3D ray) {
         double vd = ray.dot(normal);
         if (vd <= 0.0001) {
             return Optional.empty();
@@ -37,7 +37,7 @@ public class Plane extends SceneObject {
     }
 
     @Override
-    public Vector3D normal(Vector3D point) {
+    public Vector3D computeNormal(Vector3D point) {
         return normal;
     }
 

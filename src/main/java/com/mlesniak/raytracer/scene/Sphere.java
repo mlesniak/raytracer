@@ -18,9 +18,8 @@ public class Sphere extends SceneObject {
     }
 
     @Override
-    public Optional<Vector3D> intersect(Vector3D camera, Vector3D ray) {
-        // Use code for book, optimize later.
-        // double a = 1;
+    public Optional<Vector3D> computeIntersection(Vector3D camera, Vector3D ray) {
+        // Use code from book, optimize later.
         double b =
                 2 * (ray.x * (camera.x - center.x) + ray.y * (camera.y - center.y) + ray.z * (camera.z - center.z));
         double c = (camera.x - center.x) * (camera.x - center.x) + (camera.y - center.y) * (camera.y - center.y) +
@@ -47,7 +46,7 @@ public class Sphere extends SceneObject {
     }
 
     @Override
-    public Vector3D normal(Vector3D point) {
+    public Vector3D computeNormal(Vector3D point) {
         return new Vector3D(
                 (point.x - center.x) / radius,
                 (point.y - center.y) / radius,
