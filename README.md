@@ -1,5 +1,6 @@
-[![Build Status](http://mlesniak.com:8888/buildStatus/icon?job=raytracer)](http://mlesniak.com:8888/job/raytracer/)
-
+[![Build Status](http://jenkins.mlesniak.com/buildStatus/icon?job=raytracer)](http://jenkins.mlesniak
+.com/job/raytracer/)
+    
 # Introduction
 
 A simple raytracer. Note that the current state of this project is :boom: hacky :boom:, i.e. the code is not yet refactored, structured or 
