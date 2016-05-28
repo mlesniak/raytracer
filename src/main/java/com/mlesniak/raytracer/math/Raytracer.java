@@ -53,7 +53,7 @@ public class Raytracer {
         sceneValues = new SceneValues();
     }
 
-    public BufferedImage raytrace() {
+    public BufferedImage raytrace() throws InterruptedException {
         Stopwatch.start("raytrace");
 
         // Parallelize over lines.
@@ -76,7 +76,7 @@ public class Raytracer {
             executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
         } catch (InterruptedException e) {
             LOG.error("We waited {} days. This should never happen.", Long.MAX_VALUE);
-            throw new IllegalStateException("Timeout while awaiting computation");
+            throw e;
         }
 
         // Copy raw data to java image.
@@ -178,7 +178,7 @@ public class Raytracer {
     }
 
     private void showStatistics(long duration) {
-        long pixels = scene.getWidth() * scene.getHeight();
+        long pixels = (long)scene.getWidth() * scene.getHeight();
         long pixelPerMs = pixels / duration;
         LOG.info("pixel={}, duration={}, pixel per ms = {}, pixel per sec = {}", pixels, duration, pixelPerMs,
                 NumberFormat.getIntegerInstance().format(pixelPerMs * 1000));

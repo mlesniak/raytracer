@@ -21,7 +21,7 @@ public class Plane extends SceneObject {
     @Override
     public Optional<Vector3D> intersect(Vector3D camera, Vector3D ray) {
         double vd = ray.dot(normal);
-        if (vd == 0) {
+        if (vd <= 0.0001) {
             return Optional.empty();
         }
 
