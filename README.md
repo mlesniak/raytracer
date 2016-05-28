@@ -43,8 +43,8 @@ warning, the build fails.
 In addition, we use SonarQube with its default profile to analyse the source. If **any** warning is emitted, the build 
 fails, too. This is implemented by a very strict quality gate:
  
-<img align="center" src="https://raw.githubusercontent.com/mlesniak/raytracer/master/gallery/strict-quality-gate.png" 
-height="300" /> 
+<img src="https://raw.githubusercontent.com/mlesniak/raytracer/master/gallery/strict-quality-gate.png" 
+height="300" style="display:block; margin-left:auto; margin-right:auto;"/> 
 
 # Design remarks
 
