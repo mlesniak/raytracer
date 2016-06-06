@@ -10,11 +10,9 @@ import org.slf4j.LoggerFactory;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import javax.script.SimpleBindings;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Control animation handling..
@@ -26,15 +24,15 @@ public class Animation {
 
     private Scene scene;
 
-    public static boolean isAnimated(Scene scene) {
-        return scene.getAnimation() != null;
-    }
-
     public Animation(Scene scene) {
         this.scene = scene;
     }
 
-    public void animate() throws IOException, ScriptException, InterruptedException {
+    public static boolean isAnimated(Scene scene) {
+        return scene.getAnimation() != null;
+    }
+
+    public void animate() throws Exception {
         LOG.info("Animation starting");
         Scene.AnimationSettings animation = scene.getAnimation();
         int ticks = animation.getTicks();

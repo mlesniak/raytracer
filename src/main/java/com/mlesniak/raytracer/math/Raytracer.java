@@ -173,7 +173,6 @@ public class Raytracer {
         int rFixed = r;
         int gFixed = g;
         int bFixed = b;
-        // TODO ML Bitwise & 0xFF is faster.
         if (rFixed > 255) {
             rFixed = 255;
         }
