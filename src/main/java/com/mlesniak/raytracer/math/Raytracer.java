@@ -7,6 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferInt;
+import java.awt.image.DirectColorModel;
+import java.awt.image.Raster;
+import java.awt.image.SampleModel;
+import java.awt.image.WritableRaster;
 import java.text.NumberFormat;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
@@ -57,15 +64,15 @@ public class Raytracer {
         Stopwatch.start("raytrace");
 
         // Parallelize over lines.
-        int[][] pixels = new int[scene.getWidth()][scene.getHeight()];
+        int[] pixels = new int[scene.getHeight() * scene.getWidth()];
         for (int y = 0; y < scene.getHeight(); y++) {
             final int line = y;
             executorService.execute(() -> {
                 for (int x = 0; x < scene.getWidth(); x++) {
                     int rgb = computePixel(scene, x, line);
                     // Image and mathematical coordinate systems are different,
-                    // hence we have to flip w.r.t to the y-axis.
-                    pixels[x][scene.getHeight() - line - 1] = rgb;
+                    // hence we have to flip w.r.t the y-axis.
+                    pixels[(scene.getHeight() - line - 1) * scene.getWidth() + x] = rgb;
                 }
             });
         }
@@ -79,13 +86,12 @@ public class Raytracer {
             throw e;
         }
 
-        // Copy raw data to java image.
-        BufferedImage image = new BufferedImage(scene.getWidth(), scene.getHeight(), BufferedImage.TYPE_INT_RGB);
-        for (int y = 0; y < scene.getHeight(); y++) {
-            for (int x = 0; x < scene.getWidth(); x++) {
-                image.setRGB(x, y, pixels[x][y]);
-            }
-        }
+        // Create image from raw pixels.
+        ColorModel colorModel = DirectColorModel.getRGBdefault();
+        SampleModel sampleModel = colorModel.createCompatibleSampleModel(scene.getWidth(), scene.getHeight());
+        DataBuffer buffer = new DataBufferInt(pixels, scene.getWidth() * scene.getHeight());
+        WritableRaster raster = Raster.createWritableRaster(sampleModel, buffer, null);
+        BufferedImage image = new BufferedImage(colorModel, raster, false, null);
 
         long duration = Stopwatch.stop("raytrace");
         showStatistics(duration);
@@ -102,7 +108,7 @@ public class Raytracer {
         Vector3D ray = sceneValues.eyeRay.plus(xShift).plus(yShift).normalize();
 
         // Check ray against all objects in the scene.
-        int color = 0;
+        int color = 0xFF << 24;
         double minimalDistance = Double.MAX_VALUE;
         for (SceneObject object : scene.getObjects()) {
             Optional<Vector3D> oi = object.computeIntersection(scene.getCamera(), ray);
@@ -157,7 +163,7 @@ public class Raytracer {
             Optional<Vector3D> lightIntersection =
                     shadowObject.computeIntersection(intersection, raytoLight);
             if (lightIntersection.isPresent()) {
-                updatedColor = 0;
+                updatedColor = 0xFF << 24;
             }
         }
         return updatedColor;
@@ -167,6 +173,7 @@ public class Raytracer {
         int rFixed = r;
         int gFixed = g;
         int bFixed = b;
+        // TODO ML Bitwise & 0xFF is faster.
         if (rFixed > 255) {
             rFixed = 255;
         }
@@ -186,7 +193,8 @@ public class Raytracer {
             bFixed = 0;
         }
 
-        return rFixed << 16 | gFixed << 8 | bFixed;
+        // No transparency.
+        return 0xFF << 24 | rFixed << 16 | gFixed << 8 | bFixed;
     }
 
     private void showStatistics(long duration) {

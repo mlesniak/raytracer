@@ -3,8 +3,8 @@
 #
 
 filename: image.png
-width: 100
-height: 100
+width: 16000
+height: 16000
 
 # TODO ML Camera object with particular objects
 camera:
@@ -17,12 +17,12 @@ lookAt:
   y: 5
   z: 0
 
-animation:
-  file: src/main/resources/scene/default.js
-  ticks: 24
-  # Duration in ms
-  duration: 1000
-  loop: true
+#animation:
+#  file: src/main/resources/scene/default.js
+#  ticks: 24
+#  # Duration in ms
+#  duration: 1000
+#  loop: true
 
 # Field of View
 fov: 90

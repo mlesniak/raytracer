@@ -102,7 +102,6 @@ and write JavaScript code to modify the scene on each tick, e.g.
 - Antialiasing
 - Global illumination
 - Famous room rendering scene
-- Better parallelization (and benchmarks)
 - Support for external file formats (SketchUp? Blender?)
 - Timed Unit-Test to find performance regressions? Will this work with TravisCI?
 - ~~Shadows / Lightning~~
@@ -116,6 +115,7 @@ and write JavaScript code to modify the scene on each tick, e.g.
 - ~~Fix shadow bugs (See commit 0052291)~~
 - ~~SonarQube integration with [sonarqube-badges](https://github.com/QualInsight/qualinsight-plugins-sonarqube-badges)~~
 - ~~Animation support (might also ease debugging)~~
+- ~~Better parallelization (and benchmarks)~~
 
 # License
 
