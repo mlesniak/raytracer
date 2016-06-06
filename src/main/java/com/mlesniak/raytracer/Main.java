@@ -40,8 +40,6 @@ public final class Main {
         LOG.info("Application finished");
     }
 
-
-
     private static Optional<Scene> readScene(String[] args) throws IOException {
         if (args.length < 1) {
             LOG.error("No filename given. Aborting.");
