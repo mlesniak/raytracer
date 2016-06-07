@@ -92,6 +92,7 @@ and write JavaScript code to modify the scene on each tick, e.g.
 
 # Todo and planned features
 
+- Realtime interface with JavaFX / Swing?
 - Phong Shading
 - Multiple light sources (needs refactoring), and soft shadows, otherwise it's boring since we have no shadows anymore
 - Reflections

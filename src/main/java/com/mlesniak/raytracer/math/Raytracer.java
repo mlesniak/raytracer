@@ -61,6 +61,8 @@ public class Raytracer {
     }
 
     public BufferedImage raytrace() throws InterruptedException {
+        // Move executorService inside this. It's a private detail of the method.
+
         Stopwatch.start("raytrace");
 
         // Parallelize over lines.
