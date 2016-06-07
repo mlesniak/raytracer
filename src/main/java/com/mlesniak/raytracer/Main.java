@@ -2,12 +2,15 @@ package com.mlesniak.raytracer;
 
 import com.mlesniak.raytracer.animation.Animation;
 import com.mlesniak.raytracer.math.Raytracer;
+import com.mlesniak.raytracer.math.Vector3D;
 import com.mlesniak.raytracer.scene.Scene;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,25 +33,59 @@ public final class Main extends Application {
         // Empty.
     }
 
+    private double prevX = -1;
+    private double prevY = -1;
+
     @Override
     public void start(Stage stage) throws Exception {
         ImageView imageView = new ImageView();
 
         Optional<Scene> scene = readScene(getParameters().getRaw().toArray());
         if (scene.isPresent()) {
-            Scene s = scene.get();
+            final Scene s = scene.get();
 
             if (Animation.isAnimated(s)) {
                 new Animation(s).animate();
             } else {
-                BufferedImage image = new Raytracer(s).raytrace();
-                WritableImage img = new WritableImage(s.getWidth(), s.getHeight());
-                SwingFXUtils.toFXImage(image, img);
-
-                imageView.setImage(img);
+                renderScene(imageView, s);
                 //writeSingleImage(s, image);
             }
+            imageView.addEventHandler(MouseEvent.MOUSE_MOVED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if (!event.isShiftDown()) {
+                        return;
+                    }
+
+                    if (prevX == -1) {
+                        prevX = event.getX();
+                    }
+                    if (prevY == -1) {
+                        prevY = event.getY();
+                    }
+                    double deltaX = event.getX() - prevX;
+                    double deltaY = event.getY() - prevY;
+                    prevX = event.getX();
+                    prevY = event.getY();
+                    LOG.info("deltaX={}, deltaY={}", deltaX, deltaY);
+
+                    // Vector3D should be immutable...
+                    Vector3D lookAt = s.getLookAt();
+                    lookAt.setX(lookAt.getX() + 0.01 * deltaX);
+                    lookAt.setY(lookAt.getY() + 0.01 * deltaY);
+                    try {
+                        renderScene(imageView, s);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    event.consume();
+                }
+            });
         }
+
+
+
 
         Group root = new Group();
         root.getChildren().add(imageView);
@@ -57,6 +94,13 @@ public final class Main extends Application {
         stage.sizeToScene();
         stage.setTitle("Realtime view");
         stage.show();
+    }
+
+    private void renderScene(ImageView imageView, Scene s) throws InterruptedException {
+        BufferedImage image = new Raytracer(s).raytrace();
+        WritableImage img = new WritableImage(s.getWidth(), s.getHeight());
+        SwingFXUtils.toFXImage(image, img);
+        imageView.setImage(img);
     }
 
     public static void main(String[] args) throws Exception {

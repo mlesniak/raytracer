@@ -3,8 +3,8 @@
 #
 
 filename: image.png
-width: 400
-height: 400
+width: 300
+height: 300
 
 # TODO ML Camera object with particular objects
 camera:
