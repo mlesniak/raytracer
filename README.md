@@ -29,6 +29,7 @@ These images show progress and bugs while developing.
 ![Commit fa5d1af](gallery/image-fa5d1af.png?raw=true)
 ![Commit 628ab9e](gallery/image.png-628ab9e.gif?raw=true)
 ![Commit 628ab9e](gallery/image.png-4aaa4c5.gif?raw=true)
+![Commit c68c798](gallery/image.png-c68c798.gif?raw=true)
 
 # Quality
 
@@ -92,7 +93,7 @@ and write JavaScript code to modify the scene on each tick, e.g.
 
 # Todo and planned features
 
-- Realtime interface with JavaFX / Swing?
+- **Realtime interface with JavaFX?**
 - Phong Shading
 - Multiple light sources (needs refactoring), and soft shadows, otherwise it's boring since we have no shadows anymore
 - Reflections
