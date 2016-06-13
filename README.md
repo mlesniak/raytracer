@@ -93,8 +93,8 @@ and write JavaScript code to modify the scene on each tick, e.g.
 
 # Todo and planned features
 
-- **Realtime interface with JavaFX?**
-- Phong Shading
+- **Phong Shading**
+- Realtime interface with JavaFX?
 - Multiple light sources (needs refactoring), and soft shadows, otherwise it's boring since we have no shadows anymore
 - Reflections
 - Procedural generation
