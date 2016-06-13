@@ -38,40 +38,40 @@ objects:
   - !com.mlesniak.raytracer.scene.Sphere
     color: 0xFFFF00
     center:
-      x: 3
-      y: 3
-      z: -2
+      x: 2
+      y: 0.5
+      z: -9
     radius: 0.5
   # Red sphere
   - !com.mlesniak.raytracer.scene.Sphere
     color: 0xFF0000
     center:
-      x: 5
-      y: 7
-      z: -3
-    radius: 0.25
-  # Yellow sphere
+      x: 3
+      y: 3
+      z: -15
+    radius: 3
+  # Green sphere
   - !com.mlesniak.raytracer.scene.Sphere
       color: 0x00FF00
       center:
         x: 5
-        y: 5
-        z: -2
+        y: 1
+        z: -8
       radius: 1
   # Blue sphere
   - !com.mlesniak.raytracer.scene.Sphere
       color: 0x0000FF
       center:
-        x: 6
-        y: 5.5
-        z: 0
-      radius: 0.25
+        x: 9
+        y: 2
+        z: -10
+      radius: 2
   # Plane
   - !com.mlesniak.raytracer.scene.Plane
       color: 0xDDDDDD
       point:
         x: 0
-        y: 2
+        y: 0
         z: 0
       normal:
         x: 0
