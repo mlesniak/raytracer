@@ -30,6 +30,7 @@ public final class Main extends Application {
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
     private double prevX = -1;
     private double prevY = -1;
+
     public Main() {
         // Empty.
     }
@@ -47,7 +48,7 @@ public final class Main extends Application {
                 new Animation(s).animate();
             } else {
                 BufferedImage image = new Raytracer(s).raytrace();
-                //writeSingleImage(s, image);
+                writeSingleImage(s, image);
             }
         }
         LOG.info("Application finished");
