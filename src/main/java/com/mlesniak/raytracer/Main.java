@@ -5,6 +5,7 @@ import com.mlesniak.raytracer.math.Raytracer;
 import com.mlesniak.raytracer.math.Vector3D;
 import com.mlesniak.raytracer.scene.Scene;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -52,6 +53,7 @@ public final class Main extends Application {
             }
         }
         LOG.info("Application finished");
+        Platform.exit();
     }
 
     private static Optional<Scene> readScene(Object[] args) throws IOException {
