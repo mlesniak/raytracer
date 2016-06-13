@@ -23,6 +23,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Implementation of the raytracing algorithm.
  *
+ * The main and most interesting method is <code>raytrace()</code>, which calls all other methods in this class.
+ *
  * @author Michael Lesniak (mlesniak@micromata.de)
  */
 public class Raytracer {
@@ -60,17 +62,21 @@ public class Raytracer {
      */
     public Raytracer(Scene scene) {
         this.scene = scene;
-
         sceneValues = new SceneValues();
     }
 
-    public BufferedImage raytrace() throws InterruptedException {
+    /**
+     * Compute an image given the scene used in the constructor.
+     *
+     * @return the raytraced image.
+     */
+    public BufferedImage raytrace() {
+        Stopwatch.start("raytrace");
+
         // Parallelization support.
         int cores = Runtime.getRuntime().availableProcessors();
         ExecutorService executorService = Executors.newFixedThreadPool(cores);
         LOG.info("Initialized executor service with {} cores", cores);
-
-        Stopwatch.start("raytrace");
 
         // Each available threads computes a single line.
         int[] pixels = new int[scene.getHeight() * scene.getWidth()];
@@ -86,21 +92,18 @@ public class Raytracer {
             });
         }
 
-        // Wait (foreveR) until all threads are finished.
+        // Wait (forever) until all threads are finished.
         try {
             executorService.shutdown();
             executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
         } catch (InterruptedException e) {
             LOG.error("We waited {} days. This should never happen.", Long.MAX_VALUE);
-            throw e;
         }
 
-        // Create image from raw pixels.
+        // Create image from raw RGBA pixels.
         BufferedImage image = createBufferedImage(pixels);
 
-        long duration = Stopwatch.stop("raytrace");
-        showStatistics(duration);
-
+        showStatistics("raytrace");
         return image;
     }
 
@@ -249,10 +252,16 @@ public class Raytracer {
         return value;
     }
 
-    private void showStatistics(long duration) {
+    /**
+     * Show statistics for the computed image.
+     *
+     * @param timerName name of the timer which started when raytracing began.
+     */
+    private void showStatistics(String timerName) {
+        long duration = Stopwatch.stop(timerName);
         long pixels = (long) scene.getWidth() * scene.getHeight();
         long pixelPerMs = pixels / duration;
-        LOG.info("pixel={}, duration={}, pixel per ms = {}, pixel per sec = {}", pixels, duration, pixelPerMs,
-                NumberFormat.getIntegerInstance().format(pixelPerMs * 1000));
+        LOG.info("pixel={}, duration={}, pixel per ms = {}, pixel per sec = {}",
+                pixels, duration, pixelPerMs, NumberFormat.getIntegerInstance().format(pixelPerMs * 1000));
     }
 }
