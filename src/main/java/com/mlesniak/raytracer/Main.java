@@ -28,13 +28,44 @@ import java.util.Optional;
  */
 public final class Main extends Application {
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
-
+    private double prevX = -1;
+    private double prevY = -1;
     public Main() {
         // Empty.
     }
 
-    private double prevX = -1;
-    private double prevY = -1;
+    public static void main(String[] args) throws Exception {
+        LOG.info("Application starting");
+        // launch(args);
+        // Create simple JavaFX interface.
+
+        Optional<Scene> scene = readScene(args);
+        if (scene.isPresent()) {
+            Scene s = scene.get();
+
+            if (Animation.isAnimated(s)) {
+                new Animation(s).animate();
+            } else {
+                BufferedImage image = new Raytracer(s).raytrace();
+                //writeSingleImage(s, image);
+            }
+        }
+        LOG.info("Application finished");
+    }
+
+    private static Optional<Scene> readScene(Object[] args) throws IOException {
+        if (args.length < 1) {
+            LOG.error("No filename given. Aborting.");
+            return Optional.empty();
+        }
+        return Optional.of(Scene.readScene(args[0].toString()));
+    }
+
+    private static void writeSingleImage(Scene scene, BufferedImage image) throws IOException {
+        final String pathname = scene.getFilename();
+        ImageIO.write(image, "png", new File(pathname));
+        LOG.info("Wrote image to file {}", pathname);
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -84,9 +115,6 @@ public final class Main extends Application {
             });
         }
 
-
-
-
         Group root = new Group();
         root.getChildren().add(imageView);
         javafx.scene.Scene sc = new javafx.scene.Scene(root);
@@ -101,38 +129,5 @@ public final class Main extends Application {
         WritableImage img = new WritableImage(s.getWidth(), s.getHeight());
         SwingFXUtils.toFXImage(image, img);
         imageView.setImage(img);
-    }
-
-    public static void main(String[] args) throws Exception {
-        LOG.info("Application starting");
-        launch(args);
-        // Create simple JavaFX interface.
-
-//        Optional<Scene> scene = readScene(args);
-//        if (scene.isPresent()) {
-//            Scene s = scene.get();
-//
-//            if (Animation.isAnimated(s)) {
-//                new Animation(s).animate();
-//            } else {
-//                BufferedImage image = new Raytracer(s).raytrace();
-//                //writeSingleImage(s, image);
-//            }
-//        }
-        LOG.info("Application finished");
-    }
-
-    private static Optional<Scene> readScene(Object[] args) throws IOException {
-        if (args.length < 1) {
-            LOG.error("No filename given. Aborting.");
-            return Optional.empty();
-        }
-        return Optional.of(Scene.readScene(args[0].toString()));
-    }
-
-    private static void writeSingleImage(Scene scene, BufferedImage image) throws IOException {
-        final String pathname = scene.getFilename();
-        ImageIO.write(image, "png", new File(pathname));
-        LOG.info("Wrote image to file {}", pathname);
     }
 }
